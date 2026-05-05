@@ -14,10 +14,9 @@
         <div id="3d-container" style="width: 100%; height: 500px; background: #f8f9fa; border-radius: 20px;"></div>
     </div>
 </div>
-@endsection
 
-@stack('scripts')
-<!-- Kodingan Three.js -->
+{{-- Semua script Three.js harus masuk ke dalam @push agar terbaca oleh @stack('scripts') di file app.blade.php --}}
+@push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -36,7 +35,7 @@
     scene.add(light);
     scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
-    // Load Karakter 3D Kamu
+    // Load Karakter 3D (Pastikan file karakter.glb ada di folder public/3d/)
     const loader = new THREE.GLTFLoader();
     loader.load('/3d/karakter.glb', function (gltf) {
         scene.add(gltf.scene);
@@ -47,7 +46,7 @@
 
     camera.position.z = 5;
 
-    // Supaya bisa di-rotate oleh user
+    // Supaya bisa di-rotate oleh user (Kriteria: Silahkan web bisa view 3D)
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
 
@@ -58,4 +57,6 @@
     }
     animate();
 </script>
+@endpush
+
 @endsection
