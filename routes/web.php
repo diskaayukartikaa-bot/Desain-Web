@@ -13,3 +13,15 @@ Route::get('/about', function () {
 Route::get('/portofolio', function () {
     return view('portofolio');
 });
+
+Route::get('/services', function () {
+    return view('services');
+});
+
+Route::get('/portofolio', function () {
+    return view('portfolio');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
