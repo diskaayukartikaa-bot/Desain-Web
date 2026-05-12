@@ -8,7 +8,7 @@
         <div class="mx-auto" style="width: 80px; height: 5px; background: linear-gradient(45deg, #e91e63, #9c27b0); border-radius: 10px;"></div>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 justify-content-center">
         @php
             $services = [
                 ['icon' => 'bi-palette', 'title' => 'Art Direction', 'desc' => 'Mengarahkan konsep visual kreatif untuk branding dan kampanye digital.'],
@@ -22,12 +22,14 @@
 
         @foreach($services as $service)
         <div class="col-md-4">
-            <div class="p-4 h-100 shadow-sm border-0 bg-white text-center transition-up" style="border-radius: 20px;">
-                <div class="mb-3 d-inline-block p-3 rounded-circle" style="background: rgba(156, 39, 176, 0.1); color: #9c27b0;">
-                    <i class="bi {{ $service['icon'] }} fs-2"></i>
+            <div class="p-4 h-100 shadow-sm border-0 bg-white text-center transition-up" style="border-radius: 25px; border: 1px solid rgba(0,0,0,0.02);">
+                <div class="mb-4 d-flex align-items-center justify-content-center mx-auto" 
+                     style="width: 80px; height: 80px; background: rgba(156, 39, 176, 0.08); color: #9c27b0; border-radius: 50%;">
+                    <i class="bi {{ $service['icon'] }}" style="font-size: 2rem;"></i>
                 </div>
-                <h5 class="fw-bold" style="color: #4a148c;">{{ $service['title'] }}</h5>
-                <p class="text-muted small">{{ $service['desc'] }}</p>
+                
+                <h5 class="fw-bold mb-3" style="color: #4a148c;">{{ $service['title'] }}</h5>
+                <p class="text-muted small px-2" style="line-height: 1.6;">{{ $service['desc'] }}</p>
             </div>
         </div>
         @endforeach
@@ -35,7 +37,14 @@
 </div>
 
 <style>
-    .transition-up { transition: all 0.3s ease; }
-    .transition-up:hover { transform: translateY(-10px); }
+    .fw-800 { font-weight: 800; }
+    .transition-up { 
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    }
+    .transition-up:hover { 
+        transform: translateY(-10px); 
+        box-shadow: 0 15px 30px rgba(156, 39, 176, 0.1) !important;
+        background: linear-gradient(to bottom right, #ffffff, #fffdfb);
+    }
 </style>
 @endsection
