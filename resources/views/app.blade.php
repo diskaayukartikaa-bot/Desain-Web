@@ -53,26 +53,21 @@
             transition: width 0.3s ease;
         }
 
-        .nav-item:not(:last-child) .nav-link:hover::after {
-            width: 100%;
-        }
+        .nav-item:not(:last-child) .nav-link:hover::after { width: 100%; }
 
-        /* Menu Contact - Pill Shaped & Gradient */
         .nav-link-contact {
             background: linear-gradient(45deg, #e91e63, #9c27b0);
             color: #fff !important;
-            border-radius: 50px; /* Sangat bulat */
+            border-radius: 50px;
             padding: 8px 25px !important;
             margin-left: 15px !important;
-            border: none;
             box-shadow: 0 4px 15px rgba(233, 30, 99, 0.2);
-            transition: all 0.3s ease !important;
+            transition: 0.3s;
         }
 
         .nav-link-contact:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
-            filter: brightness(1.1);
         }
 
         .ai-asdk-widget {
@@ -83,7 +78,6 @@
             color: white;
             padding: 12px 25px;
             border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
             z-index: 1000;
             font-weight: 600;
             border: none;
@@ -100,7 +94,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="/portofolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link nav-link-contact" href="#contact">Contact</a></li>
