@@ -5,13 +5,14 @@
     <div class="col-md-6 text-center text-md-start">
         <h6 class="text-uppercase fw-bold text-secondary mb-3" style="letter-spacing: 3px;">Multimedia Specialist</h6>
         <h1 class="display-3 fw-bold mb-4" style="color: #4a148c; line-height: 1.2;">
-            Creative <span style="background: linear-gradient(45deg, #e91e63, #9c27b0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vision</span><br>
-            for Digital Era.
+            Hai, Saya <br>
+            <span style="background: linear-gradient(45deg, #e91e63, #9c27b0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Diska Ayu</span>
         </h1>
-        <p class="lead mb-5 text-muted">Hai, saya Diska. Saya membantu brand menciptakan identitas visual yang kuat melalui desain grafis, UI/UX, dan konten multimedia yang interaktif.</p>
+        <p class="lead mb-5 text-muted">Mahasiswa Multimedia Broadcasting yang fokus pada pengembangan identitas visual, desain interaktif, dan konten kreatif digital.</p>
+        
         <div class="d-flex justify-content-center justify-content-md-start gap-3">
-            <a href="/portofolio" class="btn btn-lg px-5 shadow-lg" style="background: linear-gradient(45deg, #e91e63, #9c27b0); color: white; border-radius: 30px; font-weight: 600; border: none;">Eksplor Karya</a>
-            <a href="#about" class="btn btn-outline-dark btn-lg px-5" style="border-radius: 30px; font-weight: 600;">Tentang Saya</a>
+            <a href="/portofolio" class="btn btn-lg px-5 shadow-lg" style="background: linear-gradient(45deg, #e91e63, #9c27b0); color: white; border-radius: 30px; font-weight: 600; border: none;">Lihat Karya</a>
+            <a href="#about" class="btn btn-outline-dark btn-lg px-5" style="border-radius: 30px; font-weight: 600;">Profil Saya</a>
         </div>
     </div>
     
@@ -33,17 +34,21 @@
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
+    // Pencahayaan
     const light = new THREE.DirectionalLight(0xffffff, 1.5);
     light.position.set(5, 10, 7);
     scene.add(light);
     scene.add(new THREE.AmbientLight(0xffffff, 0.8));
 
+    // Loader Karakter 3D
     const loader = new THREE.GLTFLoader();
     loader.load('/3d/karakter.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
         model.position.y = -1.2;
         model.scale.set(2.2, 2.2, 2.2);
+    }, undefined, function (error) {
+        console.error('Terjadi kesalahan saat memuat model 3D:', error);
     });
 
     camera.position.z = 5;
@@ -58,6 +63,7 @@
     }
     animate();
 
+    // Penyesuaian Ukuran Jendela
     window.addEventListener('resize', () => {
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();

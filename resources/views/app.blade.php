@@ -9,7 +9,6 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            /* Background Mesh Gradient yang lebih menarik */
             background-color: #fff5f8;
             background-image: 
                 radial-gradient(at 0% 0%, hsla(328,100%,93%,1) 0, transparent 50%), 
@@ -43,7 +42,6 @@
             transition: 0.3s;
         }
 
-        /* Hover standar untuk 4 menu pertama */
         .nav-item:not(:last-child) .nav-link::after {
             content: '';
             position: absolute;
@@ -59,22 +57,22 @@
             width: 100%;
         }
 
-        /* Desain Khusus Kotak untuk Menu Contact */
+        /* Menu Contact - Pill Shaped & Gradient */
         .nav-link-contact {
-            background: rgba(233, 30, 99, 0.1);
-            color: #e91e63 !important;
-            border: 1.5px solid #e91e63;
-            border-radius: 12px;
-            padding: 8px 20px !important;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            color: #fff !important;
+            border-radius: 50px; /* Sangat bulat */
+            padding: 8px 25px !important;
             margin-left: 15px !important;
+            border: none;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.2);
             transition: all 0.3s ease !important;
         }
 
         .nav-link-contact:hover {
-            background: #e91e63;
-            color: #fff !important;
-            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+            filter: brightness(1.1);
         }
 
         .ai-asdk-widget {
