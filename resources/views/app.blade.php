@@ -9,19 +9,22 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #fff5f8 0%, #f3e5f5 100%);
+            /* Background Mesh Gradient yang lebih menarik */
+            background-color: #fff5f8;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(328,100%,93%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(272,100%,93%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(328,100%,93%,1) 0, transparent 50%);
             color: #4a148c;
             min-height: 100vh;
             overflow-x: hidden;
         }
         
-        /* Navbar Modern & Clean */
         .navbar {
-            background: rgba(255, 255, 255, 0.7) !important;
-            backdrop-filter: blur(15px);
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(233, 30, 99, 0.05);
         }
         
         .navbar-brand {
@@ -30,39 +33,50 @@
             background: linear-gradient(45deg, #e91e63, #9c27b0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
         }
 
         .nav-link {
             font-weight: 600;
             color: #6a1b9a !important;
-            margin: 0 15px;
+            margin: 0 10px;
             position: relative;
             transition: 0.3s;
         }
 
-        /* Animasi Underline di Semua Menu */
-        .nav-link::after {
+        /* Hover standar untuk 4 menu pertama */
+        .nav-item:not(:last-child) .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
             bottom: -5px;
             left: 0;
-            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            background: #e91e63;
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover::after {
+        .nav-item:not(:last-child) .nav-link:hover::after {
             width: 100%;
         }
 
-        .nav-link:hover {
+        /* Desain Khusus Kotak untuk Menu Contact */
+        .nav-link-contact {
+            background: rgba(233, 30, 99, 0.1);
             color: #e91e63 !important;
+            border: 1.5px solid #e91e63;
+            border-radius: 12px;
+            padding: 8px 20px !important;
+            margin-left: 15px !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-link-contact:hover {
+            background: #e91e63;
+            color: #fff !important;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
             transform: translateY(-2px);
         }
 
-        /* AI ASDK Widget */
         .ai-asdk-widget {
             position: fixed;
             bottom: 30px;
@@ -75,13 +89,6 @@
             z-index: 1000;
             font-weight: 600;
             border: none;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -93,12 +100,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="/portofolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-contact" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
