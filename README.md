@@ -1,14 +1,23 @@
-Web Profil - Diska Ayu Kartika
+# Project Pemrograman Web Lanjut
 
-Halo! Saya Diska, mahasiswi D3 Teknologi Multimedia Broadcasting di PENS.
+## Identitas Mahasiswa
+- **Nama:** Diska Ayu Kartika
+- **NIM:** 5124500005
+- **Kelas:** MMB-A
 
-Keahlian & Tools
-Design & Editing: Canva, Figma, Blender, Adobe After Effects.
-Social Media: Video Editing & Content Management.
+---
 
-Proyek Saat Ini
-Siniar PENS: Pengembangan sistem manajemen studio podcast.
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Hubungi Saya
-LinkedIn: [Tautkan link LinkedIn kamu di sini]
-Email: diskaayukartikaa@gmail.com
+## Deskripsi Project
+Project ini adalah tugas mata kuliah Pemrograman Web Lanjut yang menggunakan framework Laravel.
+
+## Cara Menjalankan
+1. Clone repository ini
+2. Jalankan `composer install`
+3. Salin `.env.example` menjadi `.env` dan sesuaikan konfigurasi database
+4. Jalankan `php artisan key:generate`
+5. Jalankan `php artisan migrate`
+6. Jalankan `php artisan serve`
+
+---
