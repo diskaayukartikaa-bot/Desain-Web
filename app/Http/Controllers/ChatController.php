@@ -4,20 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Gemini\Laravel\Facades\Gemini;
+use App\Http\Controllers\Controller; // Tambahkan ini jika belum ada
 
 class ChatController extends Controller
 {
     public function chat(Request $request)
     {
-        $prompt = "Anda adalah AI Manager untuk User yang mellihat portofolio Diska Ayu Kartika, mahasiswa Teknologi Multimedia Broadcasting PENS. 
-        Diska adalah Program Director Siniar PENS dan pernah magang di Jawa Pos TV. 
-        Tugas Anda adalah membantu pengunjung website portofolionya dengan ramah dan profesional. 
-        Pertanyaan user: " . $request->message;
+        try {
+            // Memastikan ada input pesan
+            if (!$request->has('message')) {
+                return response()->json(['reply' => 'Maaf, saya tidak menerima pesan apa pun.'], 400);
+            }
 
-        $result = Gemini::geminiPro()->generateContent($prompt);
-        
-        return response()->json([
-            'reply' => $result->text()
-        ]);
+            $prompt = "Anda adalah AI Manager untuk Diska Ayu Kartika, mahasiswa Multimedia PENS. User bertanya: " . $request->message;
+            
+            // Memanggil API Gemini
+            $result = Gemini::geminiPro()->generateContent($prompt);
+            
+            return response()->json([
+                'reply' => $result->text()
+            ]);
+        } catch (\Exception $e) {
+            // Ini akan memunculkan pesan error aslinya agar kita tahu masalahnya
+            return response()->json([
+                'reply' => 'Ada kendala teknis: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }
