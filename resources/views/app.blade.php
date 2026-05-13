@@ -28,12 +28,25 @@
             border-bottom: 1px solid rgba(233, 30, 99, 0.05);
         }
         
+        /* Navbar Brand Styling with Icon alignment */
         .navbar-brand {
             font-weight: 800;
             font-size: 1.6rem;
+            display: flex;
+            align-items: center;
             background: linear-gradient(45deg, #e91e63, #9c27b0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Specific Gradient Styling for the Flower Icon */
+        .logo-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         .nav-link {
@@ -159,7 +172,6 @@
             font-size: 0.9rem;
         }
 
-        /* Fixed Circular Send Button */
         .ai-chat-input button {
             width: 40px;
             height: 40px;
@@ -174,11 +186,6 @@
             justify-content: center;
             padding: 0 !important;
             transition: 0.3s;
-        }
-
-        .ai-chat-input button:hover {
-            background: #e91e63;
-            transform: scale(1.1);
         }
 
         .ai-asdk-widget {
@@ -207,7 +214,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/">DISKA.AYU</a>
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-flower1 logo-icon"></i>
+                DISKA.AYU
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -268,7 +278,6 @@
                 input.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // Tampilkan pesan "sedang mengetik" sederhana
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'ai-msg bot';
                 typingDiv.id = 'ai-typing';
@@ -276,7 +285,6 @@
                 chatBody.appendChild(typingDiv);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // Kirim ke Laravel Backend (Gemini API)
                 fetch('/ai/chat', {
                     method: 'POST',
                     headers: {
@@ -287,7 +295,6 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Hapus pesan mengetik
                     const typing = document.getElementById('ai-typing');
                     if(typing) typing.remove();
 
