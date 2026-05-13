@@ -123,7 +123,6 @@
             border-radius: 15px;
             max-width: 85%;
             font-size: 0.85rem;
-            line-height: 1.4;
         }
 
         .ai-msg.bot {
@@ -147,6 +146,7 @@
             gap: 10px;
             background: white;
             border-radius: 0 0 20px 20px;
+            align-items: center;
         }
 
         .ai-chat-input input {
@@ -157,6 +157,28 @@
             border-radius: 12px;
             outline: none;
             font-size: 0.9rem;
+        }
+
+        /* Fixed Circular Send Button */
+        .ai-chat-input button {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            background: #9c27b0;
+            border: none;
+            border-radius: 50% !important;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+            transition: 0.3s;
+        }
+
+        .ai-chat-input button:hover {
+            background: #e91e63;
+            transform: scale(1.1);
         }
 
         .ai-asdk-widget {
@@ -170,13 +192,7 @@
             z-index: 1000;
             font-weight: 600;
             border: none;
-            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.4);
-            transition: 0.3s;
-        }
-
-        .ai-asdk-widget:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
+            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.3);
         }
 
         .btn-close-chat {
@@ -217,12 +233,12 @@
             <button onclick="toggleChat()" class="btn-close-chat"><i class="bi bi-x-lg"></i></button>
         </div>
         <div id="ai-chat-body" class="ai-chat-body">
-            <div class="ai-msg bot">Halo Diska! Saya asisten AI Anda. Ingin tahu lebih banyak tentang portofolio atau layanan saya?</div>
+            <div class="ai-msg bot">Halo Diska! Saya asisten virtual Anda. Ada yang bisa saya bantu terkait portofolio hari ini?</div>
         </div>
         <div class="ai-chat-input">
             <input type="text" id="user-input" placeholder="Tanya sesuatu...">
-            <button onclick="sendMessage()" class="btn btn-sm btn-primary rounded-circle" style="background: #9c27b0; border: none;">
-                <i class="bi bi-send-fill"></i>
+            <button onclick="sendMessage()">
+                <i class="bi bi-send-fill" style="margin-left: 2px;"></i>
             </button>
         </div>
     </div>
@@ -234,41 +250,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Toggle Chat Box
         function toggleChat() {
             const chatContainer = document.getElementById('ai-chat-container');
             chatContainer.classList.toggle('ai-chat-hidden');
         }
 
-        // Send Message Logic
         function sendMessage() {
             const input = document.getElementById('user-input');
             const chatBody = document.getElementById('ai-chat-body');
 
             if (input.value.trim() !== "") {
-                // User Message
                 const userDiv = document.createElement('div');
                 userDiv.className = 'ai-msg user';
                 userDiv.textContent = input.value;
                 chatBody.appendChild(userDiv);
 
-                const userText = input.value.toLowerCase();
+                const text = input.value.toLowerCase();
                 input.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // Simple AI Manager Response Logic
                 setTimeout(() => {
                     const botDiv = document.createElement('div');
                     botDiv.className = 'ai-msg bot';
                     
-                    if (userText.includes("halo") || userText.includes("hi")) {
-                        botDiv.textContent = "Halo! Senang bertemu Anda. Saya adalah asisten virtual Diska Ayu.";
-                    } else if (userText.includes("service") || userText.includes("layanan")) {
-                        botDiv.textContent = "Diska ahli dalam Art Direction, Video Production, dan UI/UX Design. Cek halaman Services untuk detailnya!";
-                    } else if (userText.includes("kontak") || userText.includes("email")) {
-                        botDiv.textContent = "Anda bisa menghubungi Diska di diskaayukartikaa@gmail.com atau melalui halaman Contact.";
+                    if (text.includes("halo")) {
+                        botDiv.textContent = "Halo! Saya siap membantu menata jadwal dan informasi Anda.";
+                    } else if (text.includes("siapa")) {
+                        botDiv.textContent = "Saya adalah AI Manager Diska Ayu Kartika, mahasiswa MMB PENS.";
                     } else {
-                        botDiv.textContent = "Terima kasih atas pertanyaannya! Sebagai manager Diska, saya akan memastikan pesan ini tersampaikan.";
+                        botDiv.textContent = "Pesan diterima. Saya akan segera memproses informasi tersebut.";
                     }
                     
                     chatBody.appendChild(botDiv);
@@ -277,11 +287,8 @@
             }
         }
 
-        // Enter key support
         document.getElementById('user-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
+            if (e.key === 'Enter') sendMessage();
         });
     </script>
     @stack('scripts')
