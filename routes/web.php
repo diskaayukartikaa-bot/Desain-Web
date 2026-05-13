@@ -25,3 +25,7 @@ Route::get('/portofolio', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+use App\Http\Controllers\ChatController;
+
+Route::post('/ai/chat', [ChatController::class, 'chat']);

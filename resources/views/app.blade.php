@@ -260,30 +260,52 @@
             const chatBody = document.getElementById('ai-chat-body');
 
             if (input.value.trim() !== "") {
+                const userText = input.value;
                 const userDiv = document.createElement('div');
                 userDiv.className = 'ai-msg user';
-                userDiv.textContent = input.value;
+                userDiv.textContent = userText;
                 chatBody.appendChild(userDiv);
-
-                const text = input.value.toLowerCase();
                 input.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                setTimeout(() => {
+                // Tampilkan pesan "sedang mengetik" sederhana
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'ai-msg bot';
+                typingDiv.id = 'ai-typing';
+                typingDiv.textContent = "Sedang berpikir...";
+                chatBody.appendChild(typingDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+
+                // Kirim ke Laravel Backend (Gemini API)
+                fetch('/ai/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ message: userText })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hapus pesan mengetik
+                    const typing = document.getElementById('ai-typing');
+                    if(typing) typing.remove();
+
                     const botDiv = document.createElement('div');
                     botDiv.className = 'ai-msg bot';
-                    
-                    if (text.includes("halo")) {
-                        botDiv.textContent = "Halo! Saya siap membantu menata jadwal dan informasi Anda.";
-                    } else if (text.includes("siapa")) {
-                        botDiv.textContent = "Saya adalah AI Manager Diska Ayu Kartika, mahasiswa MMB PENS.";
-                    } else {
-                        botDiv.textContent = "Pesan diterima. Saya akan segera memproses informasi tersebut.";
-                    }
-                    
+                    botDiv.textContent = data.reply;
                     chatBody.appendChild(botDiv);
                     chatBody.scrollTop = chatBody.scrollHeight;
-                }, 800);
+                })
+                .catch(error => {
+                    const typing = document.getElementById('ai-typing');
+                    if(typing) typing.remove();
+                    
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'ai-msg bot';
+                    botDiv.textContent = "Maaf, terjadi kesalahan teknis. Coba lagi nanti ya!";
+                    chatBody.appendChild(botDiv);
+                });
             }
         }
 
