@@ -11,15 +11,20 @@ class ChatController extends Controller
     public function chat(Request $request)
     {
         try {
-            $prompt = "Anda adalah AI Manager untuk Diska Ayu Kartika, mahasiswa Multimedia PENS. Jawablah dengan ramah dan profesional. Pertanyaan: " . $request->message;
+            // Kita ambil pesan dari user
+            $userMessage = $request->input('message');
+
+            // Kita perintahkan Gemini dengan identitas Anda sebagai anak PENS
+            $prompt = "Anda adalah AI Manager untuk Diska Ayu Kartika, mahasiswa MMB PENS, Program Director Siniar PENS, dan Ketua HIMA MMB. Jawablah dengan profesional dan ramah. Pertanyaan user: " . $userMessage;
             
-            // GANTI BAGIAN INI: dari geminiPro() menjadi gemini15Flash()
-            $result = Gemini::gemini15Flash()->generateContent($prompt);
+            // Gunakan model terbaru 'gemini-1.5-flash' agar cepat dan stabil
+            $result = Gemini::model('gemini-1.5-flash')->generateContent($prompt);
             
             return response()->json([
                 'reply' => $result->text()
             ]);
         } catch (\Exception $e) {
+            // Jika ada masalah, dia akan memunculkan error aslinya di chatbox
             return response()->json([
                 'reply' => 'Ada kendala teknis: ' . $e->getMessage()
             ], 500);
