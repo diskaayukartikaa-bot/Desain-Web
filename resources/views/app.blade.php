@@ -44,7 +44,6 @@
             transition: 0.3s;
         }
 
-        /* Hover underline animation for regular links */
         .nav-item:not(:last-child) .nav-link::after {
             content: '';
             position: absolute;
@@ -58,7 +57,6 @@
 
         .nav-item:not(:last-child) .nav-link:hover::after { width: 100%; }
 
-        /* Modern Pill Button for Contact */
         .nav-link-contact {
             background: linear-gradient(45deg, #e91e63, #9c27b0);
             color: #fff !important;
@@ -75,6 +73,92 @@
             filter: brightness(1.1);
         }
 
+        /* --- AI CHAT WIDGET STYLING --- */
+        #ai-chat-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(156, 39, 176, 0.25);
+            display: flex;
+            flex-direction: column;
+            z-index: 1050;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(156, 39, 176, 0.1);
+        }
+
+        .ai-chat-hidden {
+            transform: scale(0) translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(45deg, #9c27b0, #e91e63);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .ai-chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .ai-msg {
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 85%;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .ai-msg.bot {
+            background: #f3e5f5;
+            color: #4a148c;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .ai-msg.user {
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai-chat-input {
+            padding: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+            background: white;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            border: none;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 12px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
         .ai-asdk-widget {
             position: fixed;
             bottom: 30px;
@@ -86,7 +170,21 @@
             z-index: 1000;
             font-weight: 600;
             border: none;
-            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.3);
+            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.4);
+            transition: 0.3s;
+        }
+
+        .ai-asdk-widget:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .btn-close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -113,9 +211,79 @@
         @yield('content')
     </div>
 
-    <button class="ai-asdk-widget">✨ AI ASDK Helper</button>
+    <div id="ai-chat-container" class="ai-chat-hidden">
+        <div class="ai-chat-header">
+            <span><i class="bi bi-stars me-2"></i>AI Manager</span>
+            <button onclick="toggleChat()" class="btn-close-chat"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div id="ai-chat-body" class="ai-chat-body">
+            <div class="ai-msg bot">Halo Diska! Saya asisten AI Anda. Ingin tahu lebih banyak tentang portofolio atau layanan saya?</div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="user-input" placeholder="Tanya sesuatu...">
+            <button onclick="sendMessage()" class="btn btn-sm btn-primary rounded-circle" style="background: #9c27b0; border: none;">
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </div>
+    </div>
+
+    <button class="ai-asdk-widget" onclick="toggleChat()">
+        <i class="bi bi-chat-dots-fill me-2"></i> ✨ AI ASDK Helper
+    </button>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Toggle Chat Box
+        function toggleChat() {
+            const chatContainer = document.getElementById('ai-chat-container');
+            chatContainer.classList.toggle('ai-chat-hidden');
+        }
+
+        // Send Message Logic
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chatBody = document.getElementById('ai-chat-body');
+
+            if (input.value.trim() !== "") {
+                // User Message
+                const userDiv = document.createElement('div');
+                userDiv.className = 'ai-msg user';
+                userDiv.textContent = input.value;
+                chatBody.appendChild(userDiv);
+
+                const userText = input.value.toLowerCase();
+                input.value = "";
+                chatBody.scrollTop = chatBody.scrollHeight;
+
+                // Simple AI Manager Response Logic
+                setTimeout(() => {
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'ai-msg bot';
+                    
+                    if (userText.includes("halo") || userText.includes("hi")) {
+                        botDiv.textContent = "Halo! Senang bertemu Anda. Saya adalah asisten virtual Diska Ayu.";
+                    } else if (userText.includes("service") || userText.includes("layanan")) {
+                        botDiv.textContent = "Diska ahli dalam Art Direction, Video Production, dan UI/UX Design. Cek halaman Services untuk detailnya!";
+                    } else if (userText.includes("kontak") || userText.includes("email")) {
+                        botDiv.textContent = "Anda bisa menghubungi Diska di diskaayukartikaa@gmail.com atau melalui halaman Contact.";
+                    } else {
+                        botDiv.textContent = "Terima kasih atas pertanyaannya! Sebagai manager Diska, saya akan memastikan pesan ini tersampaikan.";
+                    }
+                    
+                    chatBody.appendChild(botDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 800);
+            }
+        }
+
+        // Enter key support
+        document.getElementById('user-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>
