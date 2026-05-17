@@ -1,91 +1,48 @@
-@extends('app')
+@php
+$items = [
+    // PROJECTS
+    ['id' => 'film-nasional', 'category' => 'projects', 'badge' => 'Film Production', 'color' => 'pink', 'title' => 'Short Film: Juara 1 Nasional', 'desc' => 'Produksi film pendek kompetisi nasional berskala besar.'],
+    ['id' => 'film-judol', 'category' => 'projects', 'badge' => 'Film Production', 'color' => 'pink', 'title' => 'Short Film: 10 Besar Karya Terbaik', 'desc' => 'Produksi sinema kreatif bertema realitas sosial judi online.'],
+    ['id' => 'film-av', 'category' => 'projects', 'badge' => 'Audio Visual', 'color' => 'pink', 'title' => 'Film Audio Visual Semester 2', 'desc' => 'Proyek praktikum penyutradaraan dan sinematografi PENS.'],
+    ['id' => 'yearbook', 'category' => 'projects', 'badge' => 'Graphic Design', 'color' => 'pink', 'title' => 'Yearbook Visual Design', 'desc' => 'Perancangan tata letak grafis dan konsep estetika album kenangan.'],
 
-@section('content')
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h6 class="text-uppercase fw-bold text-pink tracking-wider">My Complete Works & Journey</h6>
-        <h1 class="fw-extrabold display-4 text-purple">Portfolio Archive<span class="text-pink">.</span></h1>
-        <p class="text-muted mx-auto" style="max-width: 600px;">
-            Daftar karya visual, pengalaman kepemimpinan, trainer, dan sertifikasi profesional dalam dunia multimedia.
-        </p>
-    </div>
+    // EXPERIENCE
+    ['id' => 'mmbfest-2025', 'category' => 'experience', 'badge' => 'Leadership', 'color' => 'purple', 'title' => 'Ketua Pelaksana MMB Fest 2025', 'desc' => 'Memimpin kepanitiaan festival multimedia terbesar program studi.'],
+    ['id' => 'siniar-pens', 'category' => 'experience', 'badge' => 'Management', 'color' => 'purple', 'title' => 'Program Director Siniar PENS', 'desc' => 'Penanggung jawab utama konten dan manajemen penyiaran podcast.'],
+    ['id' => 'creative-agency', 'category' => 'experience', 'badge' => 'Professional', 'color' => 'purple', 'title' => 'Creative Agency Industry Employee', 'desc' => 'Menangani pembuatan aset kreatif dan kampanye visual klien agency.'],
+    ['id' => 'jawapos', 'category' => 'experience', 'badge' => 'Internship', 'color' => 'purple', 'title' => 'Graphic Designer Intern at Jawa Pos', 'desc' => 'Pengalaman magang profesional di industri media cetak nasional.'],
+    ['id' => 'trainer-kemen', 'category' => 'experience', 'badge' => 'Public Speaking', 'color' => 'purple', 'title' => 'Trainer Stafsus Kementerian', 'desc' => 'Mengisi pelatihan keahlian multimedia untuk jajaran staf khusus.'],
+    ['id' => 'trainer-flashcom', 'category' => 'experience', 'badge' => 'Public Speaking', 'color' => 'purple', 'title' => 'Trainer at Flashcom Indonesia', 'desc' => 'Mengajar kelas bidang keahlian desain grafis dan video editing.'],
+    ['id' => 'hima-mmb', 'category' => 'experience', 'badge' => 'Organization', 'color' => 'purple', 'title' => 'HAL HIMA MMB Pengurus Core', 'desc' => 'Manajemen program kerja internal komparasi organisasi mahasiswa.'],
+    ['id' => 'mc-events', 'category' => 'experience', 'badge' => 'Public Speaking', 'color' => 'purple', 'title' => 'Master of Ceremony (MC) Events', 'desc' => 'Pemandu jalannya berbagai acara formal dan informal di kampus.'],
+    ['id' => 'campus-expo', 'category' => 'experience', 'badge' => 'Event', 'color' => 'purple', 'title' => 'Campus Expo Coordinator', 'desc' => 'Eksibisi pengenalan dunia perkuliahan dan multimedia broadcasting.'],
+    ['id' => 'pkm-center', 'category' => 'experience', 'badge' => 'Academic', 'color' => 'purple', 'title' => 'PKM Center PENS Admin', 'desc' => 'Tim fasilitator program kreativitas mahasiswa tingkat politeknik.'],
 
-    <ul class="nav nav-pills justify-content-center mb-5 gap-2" id="portfolioTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active rounded-pill px-4 fw-bold" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-pane" type="button" role="tab">All Directory</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link rounded-pill px-4 fw-bold" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-pane" type="button" role="tab">🎬 Projects & Films</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link rounded-pill px-4 fw-bold" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience-pane" type="button" role="tab">💼 Experience & Leadership</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link rounded-pill px-4 fw-bold" id="achievements-tab" data-bs-toggle="tab" data-bs-target="#achievements-pane" type="button" role="tab">🏆 Achievements & Certs</button>
-        </li>
-    </ul>
+    // ACHIEVEMENTS
+    ['id' => 'lsp-cert', 'category' => 'achievements', 'badge' => 'Certification', 'color' => 'orange', 'title' => 'Sertifikasi Profesi Nasional LSP', 'desc' => 'Uji kompetensi keahlian resmi berlisensi BNSP.'],
+    ['id' => 'its-bizcase', 'category' => 'achievements', 'badge' => 'Competition', 'color' => 'orange', 'title' => 'Finalis ITS Business Case Competition', 'desc' => 'Pemecahan masalah strategi bisnis tingkat nasional.'],
+    ['id' => 'technogear', 'category' => 'achievements', 'badge' => 'Training', 'color' => 'orange', 'title' => 'Sertifikat LKMM Technogear', 'desc' => 'Pelatihan kepemimpinan manajemen mahasiswa tingkat dasar.'],
+    ['id' => 'mmbfest-2024', 'category' => 'achievements', 'badge' => 'Participation', 'color' => 'orange', 'title' => 'MMB Fest 2024 Participant', 'desc' => 'Kontribusi aktif dalam kepanitiaan teknis festival sebelumnya.']
+];
 
-    <div class="tab-content" id="portfolioTabsContent">
-        
-        <div class="tab-pane fade show active" id="all-pane" role="tabpanel">
-            <div class="row g-4">
-                @include('partials.portfolio-items')
+if (isset($filter)) {
+    $items = array_filter($items, function($item) use ($filter) { return $item['category'] === $filter; });
+}
+@endphp
+
+@foreach($items as $item)
+<div class="col-md-4">
+    <div class="card portfolio-card h-100 border-0 shadow-sm rounded-4 overflow-hidden" data-bs-toggle="modal" data-bs-target="#modal-{{ $item['id'] }}">
+        <div class="card-body p-4 d-flex flex-column justify-content-between">
+            <div>
+                <span class="badge bg-light-{{ $item['color'] }} rounded-pill mb-3 px-3 py-2 text-xs">{{ $item['badge'] }}</span>
+                <h5 class="card-title fw-bold text-purple mb-2">{{ $item['title'] }}</h5>
+                <p class="card-text text-muted small mb-0">{{ $item['desc'] }}</p>
+            </div>
+            <div class="mt-4 pt-2 border-top border-light text-end">
+                <span class="text-pink small fw-bold">Read details →</span>
             </div>
         </div>
-
-        <div class="tab-pane fade" id="projects-pane" role="tabpanel">
-            <div class="row g-4">
-                @include('partials.portfolio-items', ['filter' => 'projects'])
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="experience-pane" role="tabpanel">
-            <div class="row g-4">
-                @include('partials.portfolio-items', ['filter' => 'experience'])
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="achievements-pane" role="tabpanel">
-            <div class="row g-4">
-                @include('partials.portfolio-items', ['filter' => 'achievements'])
-            </div>
-        </div>
-
     </div>
 </div>
-
-@include('partials.portfolio-modals')
-
-<style>
-    .text-purple { color: #4a148c; }
-    .text-pink { color: #e91e63; }
-    .fw-extrabold { font-weight: 800; }
-    
-    /* Styling Tabs Active & Hover */
-    .nav-pills .nav-link {
-        color: #6a1b9a;
-        background-color: rgba(106, 27, 154, 0.05);
-        transition: all 0.3s ease;
-    }
-    .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
-        background: linear-gradient(45deg, #e91e63, #9c27b0) !important;
-        color: white !important;
-    }
-
-    .portfolio-card {
-        cursor: pointer;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-    }
-    .portfolio-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(156, 39, 176, 0.15) !important;
-    }
-    .portfolio-img {
-        height: 200px;
-        object-fit: cover;
-    }
-    .bg-light-purple { background-color: #f3e5f5; color: #4a148c; }
-    .bg-light-pink { background-color: #fce4ec; color: #e91e63; }
-    .bg-light-orange { background-color: #fff3e0; color: #e65100; }
-</style>
-@endsection
+@endforeach
