@@ -1,38 +1,91 @@
 @extends('app')
 
 @section('content')
-<div class="container py-5 mt-5">
+<div class="container py-5">
     <div class="text-center mb-5">
-        <h6 class="text-uppercase fw-bold mb-2" style="letter-spacing: 4px; color: #e91e63;">My Creative Works</h6>
-        <h1 class="display-4 fw-800" style="color: #4a148c; font-weight: 800;">Portfolio<span style="color: #e91e63;">.</span></h1>
+        <h6 class="text-uppercase fw-bold text-pink tracking-wider">My Complete Works & Journey</h6>
+        <h1 class="fw-extrabold display-4 text-purple">Portfolio Archive<span class="text-pink">.</span></h1>
+        <p class="text-muted mx-auto" style="max-width: 600px;">
+            Daftar karya visual, pengalaman kepemimpinan, trainer, dan sertifikasi profesional dalam dunia multimedia.
+        </p>
     </div>
 
-    <div class="row g-4">
-        @for($i = 1; $i <= 6; $i++)
-        <div class="col-md-4 col-sm-6">
-            <div class="portfolio-item position-relative overflow-hidden shadow-sm rounded-4">
-                <img src="https://via.placeholder.com/600x400" class="img-fluid w-100" alt="Work {{ $i }}">
-                <div class="portfolio-overlay d-flex align-items-center justify-content-center text-center p-3">
-                    <div class="text-white">
-                        <h5 class="fw-bold mb-1">Project Title {{ $i }}</h5>
-                        <p class="small mb-2">Category Branding</p>
-                        <a href="#" class="btn btn-sm btn-light rounded-pill px-3">View Details</a>
-                    </div>
-                </div>
+    <ul class="nav nav-pills justify-content-center mb-5 gap-2" id="portfolioTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active rounded-pill px-4 fw-bold" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-pane" type="button" role="tab">All Directory</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-pill px-4 fw-bold" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-pane" type="button" role="tab">🎬 Projects & Films</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-pill px-4 fw-bold" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience-pane" type="button" role="tab">💼 Experience & Leadership</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-pill px-4 fw-bold" id="achievements-tab" data-bs-toggle="tab" data-bs-target="#achievements-pane" type="button" role="tab">🏆 Achievements & Certs</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="portfolioTabsContent">
+        
+        <div class="tab-pane fade show active" id="all-pane" role="tabpanel">
+            <div class="row g-4">
+                @include('partials.portfolio-items')
             </div>
         </div>
-        @endfor
+
+        <div class="tab-pane fade" id="projects-pane" role="tabpanel">
+            <div class="row g-4">
+                @include('partials.portfolio-items', ['filter' => 'projects'])
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="experience-pane" role="tabpanel">
+            <div class="row g-4">
+                @include('partials.portfolio-items', ['filter' => 'experience'])
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="achievements-pane" role="tabpanel">
+            <div class="row g-4">
+                @include('partials.portfolio-items', ['filter' => 'achievements'])
+            </div>
+        </div>
+
     </div>
 </div>
 
+@include('partials.portfolio-modals')
+
 <style>
-    .portfolio-item img { transition: transform 0.5s ease; }
-    .portfolio-item:hover img { transform: scale(1.1); }
-    .portfolio-overlay {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(rgba(74, 20, 140, 0.9), rgba(233, 30, 99, 0.8));
-        opacity: 0; transition: opacity 0.3s ease;
+    .text-purple { color: #4a148c; }
+    .text-pink { color: #e91e63; }
+    .fw-extrabold { font-weight: 800; }
+    
+    /* Styling Tabs Active & Hover */
+    .nav-pills .nav-link {
+        color: #6a1b9a;
+        background-color: rgba(106, 27, 154, 0.05);
+        transition: all 0.3s ease;
     }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
+        background: linear-gradient(45deg, #e91e63, #9c27b0) !important;
+        color: white !important;
+    }
+
+    .portfolio-card {
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    }
+    .portfolio-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(156, 39, 176, 0.15) !important;
+    }
+    .portfolio-img {
+        height: 200px;
+        object-fit: cover;
+    }
+    .bg-light-purple { background-color: #f3e5f5; color: #4a148c; }
+    .bg-light-pink { background-color: #fce4ec; color: #e91e63; }
+    .bg-light-orange { background-color: #fff3e0; color: #e65100; }
 </style>
 @endsection
