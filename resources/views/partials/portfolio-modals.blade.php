@@ -1,5 +1,4 @@
 @php
-// ID yang sama seperti di atas untuk mencocokkan modal popup
 $modalIds = ['film-nasional', 'film-judol', 'film-av', 'yearbook', 'mmbfest-2025', 'siniar-pens', 'creative-agency', 'jawapos', 'trainer-kemen', 'trainer-flashcom', 'hima-mmb', 'mc-events', 'campus-expo', 'pkm-center', 'lsp-cert', 'its-bizcase', 'technogear', 'mmbfest-2024'];
 @endphp
 
