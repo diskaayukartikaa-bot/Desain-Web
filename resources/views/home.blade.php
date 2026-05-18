@@ -20,7 +20,7 @@
             <a href="/portofolio" class="btn btn-lg px-5 shadow-sm" style="background: linear-gradient(45deg, #e91e63, #9c27b0); color: white; border-radius: 12px; font-weight: 600; border: none; transition: all 0.3s ease;">
                 Explore Works
             </a>
-            <a href="#about" class="btn btn-lg px-5" style="border-radius: 12px; font-weight: 600; color: #4a148c; border: 1.5px solid rgba(74, 20, 140, 0.2); transition: all 0.3s ease;">
+            <a href="/about" class="btn btn-lg px-5" style="border-radius: 12px; font-weight: 600; color: #4a148c; border: 1.5px solid rgba(74, 20, 140, 0.2); transition: all 0.3s ease; background: transparent; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
                 About Me
             </a>
         </div>
@@ -45,6 +45,12 @@
     .btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 12px 25px rgba(233, 30, 99, 0.2);
+        color: inherit;
+    }
+    /* Memastikan teks tombol About Me tidak berubah warna menjadi putih saat di-hover */
+    a[href="/about"]:hover {
+        color: #4a148c !important;
+        background-color: rgba(74, 20, 140, 0.02) !important;
     }
 </style>
 
