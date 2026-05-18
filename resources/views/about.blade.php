@@ -44,7 +44,7 @@
             <div class="p-4 bg-white shadow-sm sticky-top" style="border-radius: 25px; top: 100px; border: 1px solid rgba(0,0,0,0.05);">
                 <div class="text-center mb-4">
                     <div style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; border: 5px solid #f8f9fa; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
-                        <img src="{{ asset('images/diska_profile.jpg') }}" alt="Diska Ayu Kartika" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="{{ asset('images/about-me.jpg') }}" alt="Diska Ayu Kartika" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <h4 class="fw-bold mb-1" style="color: #4a148c;">Diska Ayu Kartika</h4>
                     <p class="text-muted small text-uppercase" style="letter-spacing: 1px;">Multimedia Specialist & Art Director</p>
