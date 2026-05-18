@@ -63,16 +63,40 @@
     .tracking-wider { letter-spacing: 0.15em; }
     .text-xs { font-size: 0.75rem; }
     
-    /* Styling Tabs Active & Hover state */
+    /* --- STYLING BUTTON TAB FILTER (MODERN, CLEAN & MINIMALIS) --- */
     .nav-pills .nav-link {
-        color: #6a1b9a;
-        background-color: rgba(106, 27, 154, 0.05);
-        transition: all 0.3s ease;
+        color: #6a1b9a !important;
+        background-color: rgba(106, 27, 154, 0.04) !important;
+        border: 1px solid rgba(106, 27, 154, 0.08) !important;
+        padding: 10px 24px !important;
+        transition: all 0.25s ease-in-out !important;
+        position: relative !important;
     }
-    .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
+
+    /* Efek Hover Baru: Hanya warna pastel lembut tanpa memunculkan garis bawah */
+    .nav-pills .nav-link:hover {
+        background: rgba(233, 30, 99, 0.08) !important;
+        color: #e91e63 !important;
+        border-color: rgba(233, 30, 99, 0.2) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    /* Efek Active State saat Tab dipilih */
+    .nav-pills .nav-link.active {
         background: linear-gradient(45deg, #e91e63, #9c27b0) !important;
         color: white !important;
-        box-shadow: 0 4px 15px rgba(233, 30, 99, 0.2);
+        border-color: transparent !important;
+        box-shadow: 0 6px 15px rgba(233, 30, 99, 0.2) !important;
+        transform: translateY(0) !important;
+    }
+
+    /* MATIKAN TOTAL EFEK GARIS DARI GLOBAL CSS NAVBAR */
+    .nav-item .nav-link::after,
+    .nav-pills .nav-link::after {
+        display: none !important;
+        content: none !important;
+        width: 0 !important;
+        height: 0 !important;
     }
 
     /* Card Styling */
