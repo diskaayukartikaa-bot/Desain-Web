@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diska Ayu | Creative Portfolio</title>
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link class="rounded-circle" rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -216,8 +216,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <i class="bi bi-flower1 logo-icon"></i>
-                DISKA.AYU
+                <i class="bi bi-flower1 logo-icon"></i> DISKA.AYU
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -257,7 +256,7 @@
     <button class="ai-asdk-widget" onclick="toggleChat()">
         <i class="bi bi-chat-dots-fill me-2"></i> ✨ AI ASDK Helper
     </button>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
@@ -271,7 +270,9 @@
             const chatBody = document.getElementById('ai-chat-body');
 
             if (input.value.trim() !== "") {
-                const userText = input.value;
+                const userText = input.value.trim();
+                
+                // 1. Tampilkan komponen pesan pengguna
                 const userDiv = document.createElement('div');
                 userDiv.className = 'ai-msg user';
                 userDiv.textContent = userText;
@@ -279,6 +280,7 @@
                 input.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
+                // 2. Tampilkan komponen indikator sedang mengetik
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'ai-msg bot';
                 typingDiv.id = 'ai-typing';
@@ -286,34 +288,45 @@
                 chatBody.appendChild(typingDiv);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                fetch('/ai/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ message: userText })
-                })
-                .then(response => response.json())
-                .then(data => {
+                // 3. Simulasi Respon Cerdas Lokal (Bebas Error API Server)
+                setTimeout(() => {
                     const typing = document.getElementById('ai-typing');
                     if(typing) typing.remove();
 
+                    const lowerText = userText.toLowerCase();
+                    let botReply = "";
+
+                    // Logika filter kata kunci profiling
+                    if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('hey')) {
+                        botReply = "Halo! Saya AI Manager untuk Diska Ayu Kartika. Ada yang bisa saya bantu untuk meninjau portofolio, pengalaman organisasi, atau karya multimedia Diska hari ini? ✨";
+                    } 
+                    else if (lowerText.includes('portfolio') || lowerText.includes('portofolio') || lowerText.includes('karya') || lowerText.includes('film') || lowerText.includes('desain')) {
+                        botReply = "Diska memiliki rekam jejak karya yang luar biasa! Mulai dari Short Film (Juara 1 Nasional & 10 Besar Sinema Judol), proyek Audio Visual semester 2, hingga desain grafis pro. Anda bisa cek tab 'Portfolio' untuk melihat arsip lengkap beserta case study-nya! 🎬";
+                    } 
+                    else if (lowerText.includes('hima') || lowerText.includes('organisasi') || lowerText.includes('mmb fest') || lowerText.includes('pemimpin') || lowerText.includes('ketua')) {
+                        botReply = "Diska memiliki jiwa kepemimpinan yang matang. Beliau dipercaya sebagai Ketua Pelaksana MMB Fest 2025, Ketua HIMA MMB PENS, dan juga Program Director untuk Siniar PENS. Manajemen koordinasi tim adalah salah satu keahlian utamanya! 💼";
+                    } 
+                    else if (lowerText.includes('kerja') || lowerText.includes('magang') || lowerText.includes('pengalaman') || lowerText.includes('agency') || lowerText.includes('jawa pos')) {
+                        botReply = "Tentu! Diska punya pengalaman magang sebagai Graphic Designer di koran nasional Jawa Pos, Video Editor berita di Jawa Pos TV, serta aktif bekerja menangani aset visual di Creative Agency ternama. 👤";
+                    }
+                    else if (lowerText.includes('trainer') || lowerText.includes('kementerian') || lowerText.includes('mengajar') || lowerText.includes('flashcom')) {
+                        botReply = "Diska juga berpengalaman sebagai pembicara profesional! Beliau pernah dipercaya menjadi Trainer multimedia untuk jajaran Stafsus Kementerian serta menjadi Trainer desain grafis dan video editing di Flashcom Indonesia. 🎙️";
+                    }
+                    else if (lowerText.includes('kontak') || lowerText.includes('hubungi') || lowerText.includes('email') || lowerText.includes('instagram')) {
+                        botReply = "Anda bisa berkolaborasi langsung dengan Diska melalui halaman 'Contact', atau kirim pesan resmi ke email diskaayukartikaa@gmail.com dan Instagram @dayyyka_ ya! ✉️";
+                    }
+                    else {
+                        botReply = "Terima kasih atas pertanyaannya! Sebagai AI Manager Diska, saya merekomendasikan Anda meninjau menu 'Portfolio' untuk melihat karya film/desainnya, atau menu 'About' untuk membaca pengalaman profesionalnya di industri kreatif. Ada hal lain yang ingin ditanyakan?";
+                    }
+
+                    // 4. Cetak balasan simulasi ke panel body chatbox
                     const botDiv = document.createElement('div');
                     botDiv.className = 'ai-msg bot';
-                    botDiv.textContent = data.reply;
+                    botDiv.textContent = botReply;
                     chatBody.appendChild(botDiv);
                     chatBody.scrollTop = chatBody.scrollHeight;
-                })
-                .catch(error => {
-                    const typing = document.getElementById('ai-typing');
-                    if(typing) typing.remove();
-                    
-                    const botDiv = document.createElement('div');
-                    botDiv.className = 'ai-msg bot';
-                    botDiv.textContent = "Maaf, terjadi kesalahan teknis. Coba lagi nanti ya!";
-                    chatBody.appendChild(botDiv);
-                });
+
+                }, 1000); // Penundaan waktu respons selama 1 detik agar simulasi terasa natural
             }
         }
 
