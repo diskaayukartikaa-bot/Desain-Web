@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('portfolio_items', function (Blueprint $table) {
             $table->id();
+            
+            // ELEMEN UTAMA: Garis penghubung relasi (Foreign Key) yang menyambung ke tabel categories
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            
+            $table->string('slug_id'); // Menyimpan id modal (contoh: film-nasional)
+            $table->string('badge');   // Menyimpan teks badge (contoh: Film Production)
+            $table->string('title');   // Judul kegiatan/prestasi
+            $table->text('desc');      // Deskripsi singkat kegiatan
             $table->timestamps();
         });
     }

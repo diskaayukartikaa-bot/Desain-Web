@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');  // Menyimpan nama kategori (contoh: Projects & Films)
+            $table->string('slug');  // Menyimpan slug untuk filter (contoh: projects)
+            $table->string('color'); // Menyimpan warna badge (contoh: pink, purple, orange)
             $table->timestamps();
         });
     }
