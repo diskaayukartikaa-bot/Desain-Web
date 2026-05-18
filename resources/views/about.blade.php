@@ -152,7 +152,7 @@
 
 <style>
     .fw-800 { font-weight: 800; }
-    .fw-600 { font-weight: 600; }
+    .fw-600 { font-weight: 600 }
     .table tr:hover { background-color: rgba(156, 39, 176, 0.02) !important; }
 </style>
 @endsection
