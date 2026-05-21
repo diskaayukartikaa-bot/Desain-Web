@@ -274,7 +274,7 @@
                 <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Lihat Portofolio Karya')">🎬 Lihat Portofolio Karya</button>
                 <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Pengalaman Magang & Agency')">👤 Pengalaman Magang & Agency</button>
                 <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Riwayat Organisasi & HIMA')">💼 Riwayat Organisasi & HIMA</button>
-                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Hubungi Resmi & Kontak Kerja')">✉️ Hubungi / Kontrak Kerja</button>
+                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Hubungi Resmi & Kontak Kerja')">✉️ Hubungi Resmi & Kontak Kerja</button>
             </div>
         </div>
 
@@ -298,7 +298,7 @@
             chatContainer.classList.toggle('ai-chat-hidden');
         }
 
-        // Fungsi otomatis memproses pilihan tombol rekomendasi (Selalu Tetap Ada)
+        // Fungsi otomatis memproses pilihan tombol rekomendasi
         function sendSuggestion(text) {
             const input = document.getElementById('user-input');
             input.value = text;
@@ -331,7 +331,7 @@
                 chatBody.insertBefore(typingDiv, wrapper);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // 3. Simulasi Respons Juru Bicara Lembaga (Ringkas & Padat)
+                // 3. Simulasi Respons Juru Bicara Lembaga (Super Teliti & Akurat)
                 setTimeout(() => {
                     const typing = document.getElementById('ai-typing');
                     if(typing) typing.remove();
@@ -339,23 +339,29 @@
                     const lowerText = userText.toLowerCase();
                     let botReply = "";
 
-                    if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('selamat')) {
-                        botReply = "Halo! Terima kasih berkunjung. Saya siap memandu Anda meninjau kompetensi multimedia, organisasi, serta riwayat industri kreatif Diska Ayu. Silakan klik menu pilihan atau ajukan pertanyaan! 😊";
-                    } 
+                    // PRIORITAS UTAMA (CEK 1): Kasus Hubungi, Kontak, Kontrak, atau Kerja Sama Instansi
+                    if (lowerText.includes('hubungi') || lowerText.includes('kontak') || lowerText.includes('kontrak') || lowerText.includes('hubungi resmi')) {
+                        botReply = "Silakan masuk ke menu 'Contact' untuk dapat menghubungi Diska. Terima kasih, selamat bekerja sama! ✉️";
+                    }
+                    // CEK 2: Tombol / Keyword Portfolio & Karya
                     else if (lowerText.includes('portfolio') || lowerText.includes('portofolio') || lowerText.includes('karya') || lowerText.includes('film') || lowerText.includes('desain')) {
                         botReply = "Diska memiliki rekam jejak kuat di Short Film (Juara 1 Nasional), Audio Visual, dan UI/UX pro. Detail arsip lengkap dan case study visualnya bisa langsung Anda akses di tab menu 'Portfolio'! 🎬";
                     } 
+                    // CEK 3: Tombol / Keyword Organisasi & HIMA
                     else if (lowerText.includes('hima') || lowerText.includes('organisasi') || lowerText.includes('mmb fest') || lowerText.includes('pemimpin') || lowerText.includes('ketua')) {
-                        botReply = "Diska memiliki kapabilitas manajemen tim matang selaku Ketua HIMA MMB PENS, Ketua Pelaksana MMB Fest 2025, dan Program Director Siniar PENS. Koordinasi proyek besar adalah keunggulannya. 💼";
+                        botReply = "Diska memiliki kapabilitas manajemen tim matang selaku Ketua HIMA MMB PENS, Ketua Pelaksana MMB Fest 2025, and Program Director Siniar PENS. Koordinasi proyek besar adalah keunggulannya. 💼";
                     } 
-                    else if (lowerText.includes('kerja') || lowerText.includes('magang') || lowerText.includes('pengalaman') || lowerText.includes('agency') || lowerText.includes('jawa pos')) {
+                    // CEK 4: Tombol / Keyword Pengalaman Magang & Agency
+                    else if (lowerText.includes('magang') || lowerText.includes('agency') || lowerText.includes('jawa pos') || lowerText.includes('kerja') || lowerText.includes('pengalaman')) {
                         botReply = "Diska berpengalaman aktif industri sebagai Graphic Designer koran Jawa Pos, Video Editor Jawa Pos TV, serta mengelola visual aset digital di Creative Agency (Viscara & Trix Collective). 👤";
                     }
-                    else if (lowerText.includes('kontak') || lowerText.includes('hubungi') || lowerText.includes('email') || lowerText.includes('kontrak')) {
-                        botReply = "Untuk kontrak kerja, diskusi proyek remote (WFA), atau rekrutmen agensi, Anda bisa mengisi formulir halaman 'Contact' atau mengirim email ke diskaayukartikaa@gmail.com. ✉️";
-                    }
+                    // CEK 5: Keyword Sapaan Awal
+                    else if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('selamat')) {
+                        botReply = "Halo! Terima kasih berkunjung. Saya siap memandu Anda meninjau kompetensi multimedia, organisasi, serta riwayat industri kreatif Diska Ayu. Silakan klik menu pilihan di bawah ini! 😊";
+                    } 
+                    // CEK DEFAULT: Jika mengetik bebas tidak cocok
                     else {
-                        botReply = "Terima kasih atas pertanyaannya! Rekomendasi terbaik adalah membuka halaman 'Portfolio' untuk karya visual atau halaman 'About' untuk resume industri beliau. Ada info lain yang Anda butuhkan?";
+                        botReply = "Terima kasih atas pertanyaannya! Rekomendasi terbaik adalah memilih menu pilihan di bawah, atau membuka halaman 'Portfolio' untuk karya visual dan halaman 'About' untuk resume industri beliau.";
                     }
 
                     // 4. Cetak balasan simulasi tepat di atas komponen tombol menu rekomendasi
@@ -365,7 +371,7 @@
                     chatBody.insertBefore(botDiv, wrapper);
                     chatBody.scrollTop = chatBody.scrollHeight;
 
-                }, 800); // Dipercepat menjadi 0.8 detik agar terasa responsif
+                }, 800);
             }
         }
 
