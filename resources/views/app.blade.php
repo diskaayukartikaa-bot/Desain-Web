@@ -208,6 +208,26 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
+
+        /* Desain Tombol Rekomendasi Chat */
+        .btn-outline-purple {
+            color: #6a1b9a !important;
+            border: 1px solid rgba(156, 39, 176, 0.3) !important;
+            background: rgba(255, 255, 255, 0.6) !important;
+            border-radius: 20px !important;
+            font-size: 0.75rem !important;
+            padding: 6px 14px !important;
+            font-weight: 600 !important;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+        .btn-outline-purple:hover {
+            background: linear-gradient(45deg, #e91e63, #9c27b0) !important;
+            color: white !important;
+            border-color: transparent !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(156, 39, 176, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -241,7 +261,14 @@
             <button onclick="toggleChat()" class="btn-close-chat"><i class="bi bi-x-lg"></i></button>
         </div>
         <div id="ai-chat-body" class="ai-chat-body">
-            <div class="ai-msg bot">Halo! Selamat datang di platform kreatif Diska Ayu. Saya AI Manager yang siap membantu Anda meninjau portofolio, riwayat proyek, maupun mendiskusikan peluang kolaborasi bisnis dan kontrak kerja profesional. Ada yang bisa saya bantu terkait kebutuhan institusi atau agensi Anda? ✨</div>
+            <div class="ai-msg bot">Halo! Selamat datang di platform kreatif Diska Ayu. Ada yang bisa saya bantu terkait kebutuhan institusi atau agensi Anda? ✨</div>
+            
+            <div id="ai-suggestions" class="d-flex flex-column gap-2 mt-2">
+                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Lihat Portofolio Karya')">🎬 Lihat Portofolio Karya</button>
+                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Pengalaman Magang & Agency')">👤 Pengalaman Magang & Agency</button>
+                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Riwayat Organisasi & HIMA')">💼 Riwayat Organisasi & HIMA</button>
+                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Hubungi Resmi & Kontak Kerja')">✉️ Hubungi Resmi & Kontak Kerja</button>
+            </div>
         </div>
         <div class="ai-chat-input">
             <input type="text" id="user-input" placeholder="Tanya sesuatu...">
@@ -263,6 +290,19 @@
             chatContainer.classList.toggle('ai-chat-hidden');
         }
 
+        // Fungsi otomatis memproses pilihan tombol rekomendasi
+        function sendSuggestion(text) {
+            const input = document.getElementById('user-input');
+            input.value = text;
+            sendMessage();
+            
+            // Sembunyikan daftar tombol rekomendasi agar chatroom bersih
+            const suggestions = document.getElementById('ai-suggestions');
+            if (suggestions) {
+                suggestions.style.display = 'none';
+            }
+        }
+
         function sendMessage() {
             const input = document.getElementById('user-input');
             const chatBody = document.getElementById('ai-chat-body');
@@ -270,7 +310,7 @@
             if (input.value.trim() !== "") {
                 const userText = input.value.trim();
                 
-                // 1. Tampilkan komponen pesan pengguna
+                // 1. Tampilkan pesan dari pengunjung
                 const userDiv = document.createElement('div');
                 userDiv.className = 'ai-msg user';
                 userDiv.textContent = userText;
@@ -278,7 +318,7 @@
                 input.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // 2. Tampilkan komponen indikator sedang mengetik
+                // 2. Tampilkan status sedang mengetik
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'ai-msg bot';
                 typingDiv.id = 'ai-typing';
@@ -286,7 +326,7 @@
                 chatBody.appendChild(typingDiv);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // 3. Simulasi Respon Cerdas Lokal Berorientasi Lembaga & Kontrak Industri
+                // 3. Simulasi Respons Juru Bicara Lembaga & Kontrak Profesional
                 setTimeout(() => {
                     const typing = document.getElementById('ai-typing');
                     if(typing) typing.remove();
@@ -294,7 +334,6 @@
                     const lowerText = userText.toLowerCase();
                     let botReply = "";
 
-                    // Logika filter kata kunci respons formal
                     if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('hey') || lowerText.includes('selamat')) {
                         botReply = "Halo! Terima kasih telah berkunjung. Saya siap memandu Anda mengeksplorasi kompetensi multimedia, manajemen organisasi, serta pengalaman kerja industri Diska Ayu untuk menyelaraskan kebutuhan proyek agensi atau perusahaan Anda. Silakan tanyakan apa saja! 😊";
                     } 
