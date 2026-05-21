@@ -29,7 +29,6 @@
             border-bottom: 1px solid rgba(233, 30, 99, 0.05);
         }
         
-        /* Navbar Brand Styling with Icon alignment */
         .navbar-brand {
             font-weight: 800;
             font-size: 1.6rem;
@@ -40,7 +39,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Specific Gradient Styling for the Flower Icon */
         .logo-icon {
             font-size: 1.8rem;
             margin-right: 10px;
@@ -243,7 +241,7 @@
             <button onclick="toggleChat()" class="btn-close-chat"><i class="bi bi-x-lg"></i></button>
         </div>
         <div id="ai-chat-body" class="ai-chat-body">
-            <div class="ai-msg bot">Halo Diska! Saya asisten virtual Anda. Ada yang bisa saya bantu terkait portofolio hari ini?</div>
+            <div class="ai-msg bot">Halo! Selamat datang di platform kreatif Diska Ayu. Saya AI Manager yang siap membantu Anda meninjau portofolio, riwayat proyek, maupun mendiskusikan peluang kolaborasi bisnis dan kontrak kerja profesional. Ada yang bisa saya bantu terkait kebutuhan institusi atau agensi Anda? ✨</div>
         </div>
         <div class="ai-chat-input">
             <input type="text" id="user-input" placeholder="Tanya sesuatu...">
@@ -288,7 +286,7 @@
                 chatBody.appendChild(typingDiv);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // 3. Simulasi Respon Cerdas Lokal (Bebas Error API Server)
+                // 3. Simulasi Respon Cerdas Lokal Berorientasi Lembaga & Kontrak Industri
                 setTimeout(() => {
                     const typing = document.getElementById('ai-typing');
                     if(typing) typing.remove();
@@ -296,27 +294,27 @@
                     const lowerText = userText.toLowerCase();
                     let botReply = "";
 
-                    // Logika filter kata kunci profiling
-                    if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('hey')) {
-                        botReply = "Halo! Saya AI Manager untuk Diska Ayu Kartika. Ada yang bisa saya bantu untuk meninjau portofolio, pengalaman organisasi, atau karya multimedia Diska hari ini? ✨";
+                    // Logika filter kata kunci respons formal
+                    if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('hey') || lowerText.includes('selamat')) {
+                        botReply = "Halo! Terima kasih telah berkunjung. Saya siap memandu Anda mengeksplorasi kompetensi multimedia, manajemen organisasi, serta pengalaman kerja industri Diska Ayu untuk menyelaraskan kebutuhan proyek agensi atau perusahaan Anda. Silakan tanyakan apa saja! 😊";
                     } 
                     else if (lowerText.includes('portfolio') || lowerText.includes('portofolio') || lowerText.includes('karya') || lowerText.includes('film') || lowerText.includes('desain')) {
-                        botReply = "Diska memiliki rekam jejak karya yang luar biasa! Mulai dari Short Film (Juara 1 Nasional & 10 Besar Sinema Judol), proyek Audio Visual semester 2, hingga desain grafis pro. Anda bisa cek tab 'Portfolio' untuk melihat arsip lengkap beserta case study-nya! 🎬";
+                        botReply = "Diska memiliki rekam jejak karya yang sangat kuat, di antaranya Short Film (Juara 1 Nasional & 10 Besar Sinema Realitas Sosial), proyek Audio Visual semester 2, hingga desain grafis pro. Anda bisa cek tab 'Portfolio' untuk melihat arsip lengkap beserta keseluruhan case study produksi! 🎬";
                     } 
                     else if (lowerText.includes('hima') || lowerText.includes('organisasi') || lowerText.includes('mmb fest') || lowerText.includes('pemimpin') || lowerText.includes('ketua')) {
-                        botReply = "Diska memiliki jiwa kepemimpinan yang matang. Beliau dipercaya sebagai Ketua Pelaksana MMB Fest 2025, Ketua HIMA MMB PENS, dan juga Program Director untuk Siniar PENS. Manajemen koordinasi tim adalah salah satu keahlian utamanya! 💼";
+                        botReply = "Dalam aspek manajemen dan kepemimpinan, Diska memiliki kapabilitas koordinasi tim yang matang. Beliau dipercaya memegang posisi strategis sebagai Ketua HIMA MMB PENS, Ketua Pelaksana MMB Fest 2025, serta Program Director untuk Siniar PENS. Eksekusi program kerja berskala besar adalah keunggulannya. 💼";
                     } 
                     else if (lowerText.includes('kerja') || lowerText.includes('magang') || lowerText.includes('pengalaman') || lowerText.includes('agency') || lowerText.includes('jawa pos')) {
-                        botReply = "Tentu! Diska punya pengalaman magang sebagai Graphic Designer di koran nasional Jawa Pos, Video Editor berita di Jawa Pos TV, serta aktif bekerja menangani aset visual di Creative Agency ternama. 👤";
+                        botReply = "Diska telah berpengalaman aktif di lingkungan industri kreatif profesional. Beliau pernah melaksanakan magang sebagai Graphic Designer di koran nasional Jawa Pos, Video Editor di Jawa Pos TV, serta mengelola pembuatan aset visual komparatif di Creative Agency (Viscara & Trix Collective). 👤";
                     }
                     else if (lowerText.includes('trainer') || lowerText.includes('kementerian') || lowerText.includes('mengajar') || lowerText.includes('flashcom')) {
-                        botReply = "Diska juga berpengalaman sebagai pembicara profesional! Beliau pernah dipercaya menjadi Trainer multimedia untuk jajaran Stafsus Kementerian serta menjadi Trainer desain grafis dan video editing di Flashcom Indonesia. 🎙️";
+                        botReply = "Selain keahlian teknis, koordinasi komunikasi publik juga menjadi keahlian unggulannya. Diska dipercaya menjadi Trainer keahlian multimedia untuk jajaran Stafsus Kementerian serta aktif mengajar kelas desain grafis dan video editing di Flashcom Indonesia. 🎙️";
                     }
                     else if (lowerText.includes('kontak') || lowerText.includes('hubungi') || lowerText.includes('email') || lowerText.includes('instagram')) {
-                        botReply = "Anda bisa berkolaborasi langsung dengan Diska melalui halaman 'Contact', atau kirim pesan resmi ke email diskaayukartikaa@gmail.com dan Instagram @dayyyka_ ya! ✉️";
+                        botReply = "Untuk mendiskusikan penawaran kerja sama, peluang proyek remote (WFA), atau kebutuhan rekrutmen institusi, Anda dapat mengirimkan pesan resmi melalui formulir di halaman 'Contact', atau langsung menghubungi korespondensi email di diskaayukartikaa@gmail.com. ✉️";
                     }
                     else {
-                        botReply = "Terima kasih atas pertanyaannya! Sebagai AI Manager Diska, saya merekomendasikan Anda meninjau menu 'Portfolio' untuk melihat karya film/desainnya, atau menu 'About' untuk membaca pengalaman profesionalnya di industri kreatif. Ada hal lain yang ingin ditanyakan?";
+                        botReply = "Terima kasih atas pertanyaannya! Sebagai AI Manager, saya merekomendasikan Anda meninjau menu 'Portfolio' untuk meninjau hasil produksi visual, atau menu 'About' untuk membaca riwayat pengalaman industri beliau. Ada kebutuhan institusi spesifik yang bisa saya bantu?";
                     }
 
                     // 4. Cetak balasan simulasi ke panel body chatbox
@@ -326,7 +324,7 @@
                     chatBody.appendChild(botDiv);
                     chatBody.scrollTop = chatBody.scrollHeight;
 
-                }, 1000); // Penundaan waktu respons selama 1 detik agar simulasi terasa natural
+                }, 1000);
             }
         }
 
