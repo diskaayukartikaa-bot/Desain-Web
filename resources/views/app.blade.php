@@ -213,7 +213,7 @@
         .btn-outline-purple {
             color: #6a1b9a !important;
             border: 1px solid rgba(156, 39, 176, 0.3) !important;
-            background: rgba(255, 255, 255, 0.6) !important;
+            background: rgba(255, 255, 255, 0.7) !important;
             border-radius: 20px !important;
             font-size: 0.75rem !important;
             padding: 6px 14px !important;
@@ -227,6 +227,12 @@
             border-color: transparent !important;
             transform: translateY(-1px);
             box-shadow: 0 4px 10px rgba(156, 39, 176, 0.15);
+        }
+        .ai-suggestions-box {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -260,16 +266,18 @@
             <span><i class="bi bi-stars me-2"></i>AI Manager</span>
             <button onclick="toggleChat()" class="btn-close-chat"><i class="bi bi-x-lg"></i></button>
         </div>
+        
         <div id="ai-chat-body" class="ai-chat-body">
-            <div class="ai-msg bot">Halo! Selamat datang di platform kreatif Diska Ayu. Ada yang bisa saya bantu terkait kebutuhan institusi atau agensi Anda? ✨</div>
+            <div class="ai-msg bot">Halo! Ada yang bisa saya bantu terkait kebutuhan proyek institusi atau agensi Anda? ✨</div>
             
-            <div id="ai-suggestions" class="d-flex flex-column gap-2 mt-2">
+            <div id="ai-suggestions-wrapper" class="ai-suggestions-box">
                 <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Lihat Portofolio Karya')">🎬 Lihat Portofolio Karya</button>
                 <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Pengalaman Magang & Agency')">👤 Pengalaman Magang & Agency</button>
                 <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Riwayat Organisasi & HIMA')">💼 Riwayat Organisasi & HIMA</button>
-                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Hubungi Resmi & Kontak Kerja')">✉️ Hubungi Resmi & Kontak Kerja</button>
+                <button class="btn btn-sm btn-outline-purple" onclick="sendSuggestion('Hubungi Resmi & Kontak Kerja')">✉️ Hubungi / Kontrak Kerja</button>
             </div>
         </div>
+
         <div class="ai-chat-input">
             <input type="text" id="user-input" placeholder="Tanya sesuatu...">
             <button onclick="sendMessage()">
@@ -290,22 +298,17 @@
             chatContainer.classList.toggle('ai-chat-hidden');
         }
 
-        // Fungsi otomatis memproses pilihan tombol rekomendasi
+        // Fungsi otomatis memproses pilihan tombol rekomendasi (Selalu Tetap Ada)
         function sendSuggestion(text) {
             const input = document.getElementById('user-input');
             input.value = text;
             sendMessage();
-            
-            // Sembunyikan daftar tombol rekomendasi agar chatroom bersih
-            const suggestions = document.getElementById('ai-suggestions');
-            if (suggestions) {
-                suggestions.style.display = 'none';
-            }
         }
 
         function sendMessage() {
             const input = document.getElementById('user-input');
             const chatBody = document.getElementById('ai-chat-body');
+            const wrapper = document.getElementById('ai-suggestions-wrapper');
 
             if (input.value.trim() !== "") {
                 const userText = input.value.trim();
@@ -314,7 +317,9 @@
                 const userDiv = document.createElement('div');
                 userDiv.className = 'ai-msg user';
                 userDiv.textContent = userText;
-                chatBody.appendChild(userDiv);
+                
+                // Sisipkan pesan sebelum kotak tombol menu agar tombol selalu berada di posisi paling bawah
+                chatBody.insertBefore(userDiv, wrapper);
                 input.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
@@ -323,10 +328,10 @@
                 typingDiv.className = 'ai-msg bot';
                 typingDiv.id = 'ai-typing';
                 typingDiv.textContent = "Sedang berpikir...";
-                chatBody.appendChild(typingDiv);
+                chatBody.insertBefore(typingDiv, wrapper);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // 3. Simulasi Respons Juru Bicara Lembaga & Kontrak Profesional
+                // 3. Simulasi Respons Juru Bicara Lembaga (Ringkas & Padat)
                 setTimeout(() => {
                     const typing = document.getElementById('ai-typing');
                     if(typing) typing.remove();
@@ -334,36 +339,33 @@
                     const lowerText = userText.toLowerCase();
                     let botReply = "";
 
-                    if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('hey') || lowerText.includes('selamat')) {
-                        botReply = "Halo! Terima kasih telah berkunjung. Saya siap memandu Anda mengeksplorasi kompetensi multimedia, manajemen organisasi, serta pengalaman kerja industri Diska Ayu untuk menyelaraskan kebutuhan proyek agensi atau perusahaan Anda. Silakan tanyakan apa saja! 😊";
+                    if (lowerText.includes('halo') || lowerText.includes('hallo') || lowerText.includes('hi') || lowerText.includes('selamat')) {
+                        botReply = "Halo! Terima kasih berkunjung. Saya siap memandu Anda meninjau kompetensi multimedia, organisasi, serta riwayat industri kreatif Diska Ayu. Silakan klik menu pilihan atau ajukan pertanyaan! 😊";
                     } 
                     else if (lowerText.includes('portfolio') || lowerText.includes('portofolio') || lowerText.includes('karya') || lowerText.includes('film') || lowerText.includes('desain')) {
-                        botReply = "Diska memiliki rekam jejak karya yang sangat kuat, di antaranya Short Film (Juara 1 Nasional & 10 Besar Sinema Realitas Sosial), proyek Audio Visual semester 2, hingga desain grafis pro. Anda bisa cek tab 'Portfolio' untuk melihat arsip lengkap beserta keseluruhan case study produksi! 🎬";
+                        botReply = "Diska memiliki rekam jejak kuat di Short Film (Juara 1 Nasional), Audio Visual, dan UI/UX pro. Detail arsip lengkap dan case study visualnya bisa langsung Anda akses di tab menu 'Portfolio'! 🎬";
                     } 
                     else if (lowerText.includes('hima') || lowerText.includes('organisasi') || lowerText.includes('mmb fest') || lowerText.includes('pemimpin') || lowerText.includes('ketua')) {
-                        botReply = "Dalam aspek manajemen dan kepemimpinan, Diska memiliki kapabilitas koordinasi tim yang matang. Beliau dipercaya memegang posisi strategis sebagai Ketua HIMA MMB PENS, Ketua Pelaksana MMB Fest 2025, serta Program Director untuk Siniar PENS. Eksekusi program kerja berskala besar adalah keunggulannya. 💼";
+                        botReply = "Diska memiliki kapabilitas manajemen tim matang selaku Ketua HIMA MMB PENS, Ketua Pelaksana MMB Fest 2025, dan Program Director Siniar PENS. Koordinasi proyek besar adalah keunggulannya. 💼";
                     } 
                     else if (lowerText.includes('kerja') || lowerText.includes('magang') || lowerText.includes('pengalaman') || lowerText.includes('agency') || lowerText.includes('jawa pos')) {
-                        botReply = "Diska telah berpengalaman aktif di lingkungan industri kreatif profesional. Beliau pernah melaksanakan magang sebagai Graphic Designer di koran nasional Jawa Pos, Video Editor di Jawa Pos TV, serta mengelola pembuatan aset visual komparatif di Creative Agency (Viscara & Trix Collective). 👤";
+                        botReply = "Diska berpengalaman aktif industri sebagai Graphic Designer koran Jawa Pos, Video Editor Jawa Pos TV, serta mengelola visual aset digital di Creative Agency (Viscara & Trix Collective). 👤";
                     }
-                    else if (lowerText.includes('trainer') || lowerText.includes('kementerian') || lowerText.includes('mengajar') || lowerText.includes('flashcom')) {
-                        botReply = "Selain keahlian teknis, koordinasi komunikasi publik juga menjadi keahlian unggulannya. Diska dipercaya menjadi Trainer keahlian multimedia untuk jajaran Stafsus Kementerian serta aktif mengajar kelas desain grafis dan video editing di Flashcom Indonesia. 🎙️";
-                    }
-                    else if (lowerText.includes('kontak') || lowerText.includes('hubungi') || lowerText.includes('email') || lowerText.includes('instagram')) {
-                        botReply = "Untuk mendiskusikan penawaran kerja sama, peluang proyek remote (WFA), atau kebutuhan rekrutmen institusi, Anda dapat mengirimkan pesan resmi melalui formulir di halaman 'Contact', atau langsung menghubungi korespondensi email di diskaayukartikaa@gmail.com. ✉️";
+                    else if (lowerText.includes('kontak') || lowerText.includes('hubungi') || lowerText.includes('email') || lowerText.includes('kontrak')) {
+                        botReply = "Untuk kontrak kerja, diskusi proyek remote (WFA), atau rekrutmen agensi, Anda bisa mengisi formulir halaman 'Contact' atau mengirim email ke diskaayukartikaa@gmail.com. ✉️";
                     }
                     else {
-                        botReply = "Terima kasih atas pertanyaannya! Sebagai AI Manager, saya merekomendasikan Anda meninjau menu 'Portfolio' untuk meninjau hasil produksi visual, atau menu 'About' untuk membaca riwayat pengalaman industri beliau. Ada kebutuhan institusi spesifik yang bisa saya bantu?";
+                        botReply = "Terima kasih atas pertanyaannya! Rekomendasi terbaik adalah membuka halaman 'Portfolio' untuk karya visual atau halaman 'About' untuk resume industri beliau. Ada info lain yang Anda butuhkan?";
                     }
 
-                    // 4. Cetak balasan simulasi ke panel body chatbox
+                    // 4. Cetak balasan simulasi tepat di atas komponen tombol menu rekomendasi
                     const botDiv = document.createElement('div');
                     botDiv.className = 'ai-msg bot';
                     botDiv.textContent = botReply;
-                    chatBody.appendChild(botDiv);
+                    chatBody.insertBefore(botDiv, wrapper);
                     chatBody.scrollTop = chatBody.scrollHeight;
 
-                }, 1000);
+                }, 800); // Dipercepat menjadi 0.8 detik agar terasa responsif
             }
         }
 
