@@ -21,7 +21,7 @@
         </div>
         <div class="col-6 col-md-3">
             <div class="p-3 shadow-sm border-0 rounded-4 bg-white">
-                <h2 class="fw-bold mb-0" style="color: #9c27b0;">15+</h2>
+                <h2 class="fw-bold mb-0" style="color: #9c27b0;">150+</h2>
                 <small class="text-muted text-uppercase fw-600">Projects</small>
             </div>
         </div>
