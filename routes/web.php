@@ -32,3 +32,8 @@ Route::get('/contact', function () {
 
 // Rute untuk AI Chat Manager
 Route::post('/ai/chat', [ChatController::class, 'chat']);
+
+use App\Http\Controllers\PortfolioController;
+
+// Jalur web menuju halaman detail portofolio berdasarkan ID data
+Route::get('/portfolio/{id}', [PortfolioController::class, 'show'])->name('portfolio.show');
