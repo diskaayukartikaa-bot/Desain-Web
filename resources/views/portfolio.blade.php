@@ -54,8 +54,6 @@
     </div>
 </div>
 
-@include('partials.portfolio-modals')
-
 <style>
     .text-purple { color: #4a148c; }
     .text-pink { color: #e91e63; }
@@ -73,7 +71,6 @@
         position: relative !important;
     }
 
-    /* Efek Hover Baru: Hanya warna pastel lembut tanpa memunculkan garis bawah */
     .nav-pills .nav-link:hover {
         background: rgba(233, 30, 99, 0.08) !important;
         color: #e91e63 !important;
@@ -81,7 +78,6 @@
         transform: translateY(-1px) !important;
     }
 
-    /* Efek Active State saat Tab dipilih */
     .nav-pills .nav-link.active {
         background: linear-gradient(45deg, #e91e63, #9c27b0) !important;
         color: white !important;
@@ -90,7 +86,6 @@
         transform: translateY(0) !important;
     }
 
-    /* MATIKAN TOTAL EFEK GARIS DARI GLOBAL CSS NAVBAR */
     .nav-item .nav-link::after,
     .nav-pills .nav-link::after {
         display: none !important;
@@ -101,7 +96,8 @@
 
     /* Card Styling */
     .portfolio-card {
-        cursor: pointer;
+        text-decoration: none !important;
+        display: block;
         background: rgba(255, 255, 255, 0.8) !important;
         backdrop-filter: blur(5px);
         border: 1px solid rgba(156, 39, 176, 0.05) !important;
