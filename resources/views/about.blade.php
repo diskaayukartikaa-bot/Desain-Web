@@ -12,10 +12,11 @@
         </div>
     </div>
 
+    <!-- BOKS STATISTIK INTERAKTIF -->
     <div class="row mb-5 g-4 text-center">
         <div class="col-6 col-md-3">
             <div class="p-3 shadow-sm border-0 rounded-4 bg-white">
-                <h2 class="fw-bold mb-0" style="color: #e91e63;">6+</h2>
+                <h2 class="fw-bold mb-0" style="color: #e91e63;">2+</h2>
                 <small class="text-muted text-uppercase fw-600">Years Exp.</small>
             </div>
         </div>
@@ -27,7 +28,7 @@
         </div>
         <div class="col-6 col-md-3">
             <div class="p-3 shadow-sm border-0 rounded-4 bg-white">
-                <h2 class="fw-bold mb-0" style="color: #e91e63;">10+</h2>
+                <h2 class="fw-bold mb-0" style="color: #e91e63;">05+</h2>
                 <small class="text-muted text-uppercase fw-600">Awards</small>
             </div>
         </div>
@@ -40,6 +41,7 @@
     </div>
 
     <div class="row g-5">
+        <!-- SIDEBAR INFO PROFIL & KONTAK -->
         <div class="col-lg-4">
             <div class="p-4 bg-white shadow-sm sticky-top" style="border-radius: 25px; top: 100px; border: 1px solid rgba(0,0,0,0.05);">
                 <div class="text-center mb-4">
@@ -52,21 +54,32 @@
 
                 <div class="pt-3 border-top">
                     <div class="d-flex align-items-start mb-3">
-                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-geo-alt"></i></div>
-                        <div><small class="text-muted d-block">Location</small><strong>Surabaya, Indonesia</strong></div>
+                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-geo-alt text-purple"></i></div>
+                        <div><small class="text-muted d-block">Location</small><strong class="text-purple-dark">Surabaya, Indonesia</strong></div>
                     </div>
                     <div class="d-flex align-items-start mb-3">
-                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-envelope"></i></div>
-                        <div style="word-break: break-all;"><small class="text-muted d-block">Email</small><strong>diskaayukartikaa@gmail.com</strong></div>
+                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-envelope text-purple"></i></div>
+                        <div style="word-break: break-all;"><small class="text-muted d-block">Email</small><strong class="text-purple-dark">diskaayukartikaa@gmail.com</strong></div>
+                    </div>
+                    <!-- PENAMBAHAN NOMOR WHATSAPP KHUSUS SESUAI PERMINTAAN -->
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-whatsapp text-purple"></i></div>
+                        <div>
+                            <small class="text-muted d-block">WhatsApp / Phone</small>
+                            <a href="https://wa.me/6285730029451" target="_blank" class="text-decoration-none" style="color: inherit;">
+                                <strong class="text-purple-dark">+62 857-3002-9451</strong>
+                            </a>
+                        </div>
                     </div>
                     <div class="d-flex align-items-start">
-                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-instagram"></i></div>
-                        <div><small class="text-muted d-block">Social</small><strong>@dayyyka_</strong></div>
+                        <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-instagram text-purple"></i></div>
+                        <div><small class="text-muted d-block">Social</small><strong class="text-purple-dark">@dayyyka_</strong></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ISI KONTEN UTAMA -->
         <div class="col-lg-8">
             <div class="mb-5">
                 <h5 class="fw-bold mb-3" style="color: #4a148c;"><i class="bi bi-person-badge me-2"></i>Executive Summary</h5>
@@ -153,6 +166,8 @@
 <style>
     .fw-800 { font-weight: 800; }
     .fw-600 { font-weight: 600; }
+    .text-purple { color: #9c27b0; }
+    .text-purple-dark { color: #4a148c; }
     .table tr:hover { background-color: rgba(156, 39, 176, 0.02) !important; }
 </style>
 @endsection
