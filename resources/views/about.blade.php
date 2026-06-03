@@ -15,7 +15,7 @@
     <div class="row mb-5 g-4 text-center">
         <div class="col-6 col-md-3">
             <div class="p-3 shadow-sm border-0 rounded-4 bg-white">
-                <h2 class="fw-bold mb-0" style="color: #e91e63;">2+</h2>
+                <h2 class="fw-bold mb-0" style="color: #e91e63;">6+</h2>
                 <small class="text-muted text-uppercase fw-600">Years Exp.</small>
             </div>
         </div>
