@@ -1,27 +1,34 @@
-@foreach($items as $item)
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0 rounded-4 p-3 bg-white" style="position: relative;">
-            <div class="card-body d-flex flex-column justify-content-between p-2">
-                <div>
-                    <span class="badge bg-light-pink text-pink rounded-pill px-3 py-2 text-xs mb-3">
-                        {{ $item->category->name ?? 'Film Production' }}
-                    </span>
-                    
-                    <h5 class="fw-bold text-purple mb-2" style="font-size: 1.15rem; line-height: 1.4;">
-                        {{ $item->title }}
-                    </h5>
-                    
-                    <p class="text-muted small mb-4" style="line-height: 1.6;">
-                        {{ Str::limit($item->desc, 90) }}
-                    </p>
-                </div>
+@php
+    // Logika filter tab kategori bawaan halaman utama portofolio
+    if (isset($filter)) {
+        $items = array_filter($items, function($item) use ($filter) { 
+            return $item['category'] === $filter; 
+        });
+    }
+@endphp
 
-                <div class="text-end mt-auto">
-                    <a href="{{ route('portfolio.show', $item->id) }}" class="text-decoration-none fw-bold text-pink icon-link icon-link-hover">
-                        Read details <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </div>
+@foreach($items as $item)
+<div class="col-md-4 mb-4">
+    <a href="{{ route('portfolio.show', $item['id']) }}" class="card portfolio-card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-decoration-none" style="display: block;">
+        <div class="card-body p-4 d-flex flex-column justify-content-between">
+            <div>
+                <span class="badge bg-light-{{ $item['color'] ?? 'pink' }} rounded-pill mb-3 px-3 py-2 text-xs fw-semibold">
+                    {{ $item['badge'] }}
+                </span>
+                
+                <h5 class="card-title fw-bold text-purple mb-2" style="font-size: 1.15rem; line-height: 1.4;">
+                    {{ $item['title'] }}
+                </h5>
+                
+                <p class="card-text text-muted small mb-0" style="line-height: 1.6;">
+                    {{ $item['desc'] }}
+                </p>
+            </div>
+            
+            <div class="mt-4 pt-2 border-top border-light text-end">
+                <span class="text-pink small fw-bold">Read details →</span>
             </div>
         </div>
-    </div>
+    </a>
+</div>
 @endforeach
