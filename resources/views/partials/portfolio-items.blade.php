@@ -1,6 +1,8 @@
 @php
-    // Logika filter tab kategori bawaan halaman utama portofolio
-    if (isset($filter)) {
+    // Ambil data dari controller, jika tidak ada, buat array kosong agar tidak memicu crash runtime
+    $items = $items ?? [];
+
+    if (isset($filter) && !empty($items)) {
         $items = array_filter($items, function($item) use ($filter) { 
             return $item['category'] === $filter; 
         });
@@ -15,16 +17,13 @@
                 <span class="badge bg-light-{{ $item['color'] ?? 'pink' }} rounded-pill mb-3 px-3 py-2 text-xs fw-semibold">
                     {{ $item['badge'] }}
                 </span>
-                
                 <h5 class="card-title fw-bold text-purple mb-2" style="font-size: 1.15rem; line-height: 1.4;">
                     {{ $item['title'] }}
                 </h5>
-                
                 <p class="card-text text-muted small mb-0" style="line-height: 1.6;">
                     {{ $item['desc'] }}
                 </p>
             </div>
-            
             <div class="mt-4 pt-2 border-top border-light text-end">
                 <span class="text-pink small fw-bold">Read details →</span>
             </div>

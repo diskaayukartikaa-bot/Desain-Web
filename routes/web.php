@@ -37,3 +37,8 @@ use App\Http\Controllers\PortfolioController;
 
 // Jalur web menuju halaman detail portofolio berdasarkan ID data
 Route::get('/portfolio/{id}', [PortfolioController::class, 'show'])->name('portfolio.show');
+use App\Http\Controllers\PortfolioController;
+
+// Pastikan rute utama portofolio diubah menjadi seperti ini:
+Route::get('/portofolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::get('/portfolio/{id}', [PortfolioController::class, 'show'])->name('portfolio.show');
