@@ -40,12 +40,13 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Halaman Utama Portfolio
+     * Halaman Utama Portfolio (Sudah Diselaraskan ke Ejaan File View)
      */
     public function index()
     {
         $items = $this->getPortfolioData();
-        return view('portofolio', compact('items'));
+        // Diubah menjadi 'portfolio' agar cocok dengan resources/views/portfolio.blade.php
+        return view('portfolio', compact('items'));
     }
 
     /**
