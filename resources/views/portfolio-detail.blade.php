@@ -29,7 +29,7 @@
                         <span class="text-muted">Kategori:</span>
                         <strong class="text-purple-dark text-uppercase text-xs">{{ $item['category'] }}</strong>
                     </div>
-                    <div class="d-flex justify-content-between small">Base
+                    <div class="d-flex justify-content-between small">
                         <span class="text-muted">Status Penilaian:</span>
                         <strong class="text-pink"><i class="bi bi-patch-check-fill me-1"></i>Verified Framework</strong>
                     </div>
@@ -44,30 +44,30 @@
             
             <div class="star-method-timeline mt-4">
                 <div class="star-node mb-4 p-4 bg-white rounded-4 shadow-sm border-start border-4 border-purple">
-                    <h5 class="fw-bold text-purple mb-2"><i class="bi bi-compass me-2"></i>S - Situation (Situasi Skenario)</h5>
+                    <h5 class="fw-bold text-purple mb-2"><i class="bi bi-compass me-2"></i>1. Latar Belakang & Tantangan</h5>
                     <p class="text-muted small mb-0" style="line-height: 1.8; text-align: justify;">
-                        Pada awalnya, saya menghadapi sebuah tantangan nyata dalam lingkup kerja broadcasting dan industri kreatif, di mana terdapat problem statement spesifik serta keterbatasan manajemen aset visual yang menuntut penanganan taktis segera sebelum proyek <strong>{{ $item['title'] }}</strong> ini dimulai.
+                        Pada awalnya, saya menghadapi situasi nyata di lingkungan kreatif Broadcasting, di mana terdapat sebuah tantangan teknis serta problem statement spesifik yang harus diselesaikan sebelum proyek <strong>{{ $item['title'] }}</strong> ini dieksekusi.
                     </p>
                 </div>
 
                 <div class="star-node mb-4 p-4 bg-white rounded-4 shadow-sm border-start border-4 border-pink">
-                    <h5 class="fw-bold text-pink mb-2"><i class="bi bi-list-task me-2"></i>T - Task (Tugas & Tanggung Jawab)</h5>
+                    <h5 class="fw-bold text-pink mb-2"><i class="bi bi-list-task me-2"></i>2. Peran & Tanggung Jawab</h5>
                     <p class="text-muted small mb-0" style="line-height: 1.8; text-align: justify;">
-                        Dalam proyek ini, saya mengemban tanggung jawab utama untuk menyusun konsep visual, menetapkan standar output, dan memimpin perencanaan alur produksi kreatif agar seluruh parameter solusi dapat menjawab kebutuhan audiens secara terstruktur.
+                        Dalam pelaksanaan proyek ini, saya memegang peran penting yang bertanggung jawab penuh untuk merumuskan konsep, menetapkan batasan tugas, serta merancang sasaran utama agar output visual yang dihasilkan dapat berjalan efektif.
                     </p>
                 </div>
 
                 <div class="star-node mb-4 p-4 bg-white rounded-4 shadow-sm border-start border-4 border-purple">
-                    <h5 class="fw-bold text-purple mb-2"><i class="bi bi-cpu me-2"></i>A - Action (Aksi & Eksekusi Lapangan)</h5>
+                    <h5 class="fw-bold text-purple mb-2"><i class="bi bi-cpu me-2"></i>3. Metode Kerja & Eksekusi</h5>
                     <p class="text-muted small mb-0" style="line-height: 1.8; text-align: justify;">
-                        Untuk menyelesaikan tugas tersebut, saya mengimplementasikan keahlian teknis menggunakan perangkat lunak industri multimedia serta melakukan optimasi kodingan framework pendukung. Saya mengoordinasikan tim teknis secara berkala untuk memastikan eksekusi berjalan lurus sesuai timeline.
+                        Untuk merealisasikan rencana tersebut, saya mengambil langkah taktis menggunakan tools produksi profesional industri multimedia dan melakukan manajemen workflow tim secara berkala agar seluruh tahapan selesai tepat waktu sesuai standar perkuliahan PENS.
                     </p>
                 </div>
 
                 <div class="star-node p-4 bg-light-pink rounded-4 shadow-sm border-start border-4 border-pink">
-                    <h5 class="fw-bold text-pink mb-2"><i class="bi bi-trophy me-2"></i>R - Result (Hasil & Dampak Capaian)</h5>
+                    <h5 class="fw-bold text-pink mb-2"><i class="bi bi-trophy me-2"></i>4. Capaian Akhir & Dampak</h5>
                     <p class="text-purple small mb-0 fw-600" style="line-height: 1.8; text-align: justify;">
-                        Melalui aksi nyata tersebut, saya berhasil mencapai hasil akhir yang optimal dengan indikator keberhasilan: <strong>{{ $item['desc'] }}</strong>. Hasil kerja ini memberikan dampak nyata yang kredibel, terukur, dan diakui di tingkat kompetisi maupun portofolio profesional.
+                        Melalui eksekusi nyata tersebut, saya berhasil meraih hasil akhir yang optimal dengan pencapaian yang kredibel, yaitu: <strong>{{ $item['desc'] }}</strong>. Dampak dari proyek ini memberikan kontribusi positif yang terstruktur dalam portofolio saya.
                     </p>
                 </div>
             </div>
