@@ -54,7 +54,6 @@
         color: #4a148c !important;
         background-color: rgba(74, 20, 140, 0.02) !important;
     }
-    /* Efek visual kursor tangan mengepal saat menggeser model 3D */
     #3d-container:active {
         cursor: grabbing;
     }
@@ -73,30 +72,30 @@
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Pencahayaan Studio Keliling agar model terlihat jelas dari segala arah
-    const light1 = new THREE.DirectionalLight(0xffffff, 2.5);
-    light1.position.set(5, 10, 7);
-    scene.add(light1);
+    // Pencahayaan multi-arah agar objek terlihat cerah dari sudut pandang mana pun
+    const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    mainLight.position.set(5, 10, 7);
+    scene.add(mainLight);
     
-    const light2 = new THREE.DirectionalLight(0xffffff, 1.8);
-    light2.position.set(-5, 5, -7);
-    scene.add(light2);
+    const backLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    backLight.position.set(-5, 5, -7);
+    scene.add(backLight);
 
-    const light3 = new THREE.DirectionalLight(0xffffff, 1.2);
-    light3.position.set(0, -10, 0); // Pencahayaan bawah agar bagian kaki tidak gelap gulita
-    scene.add(light3);
+    const bottomLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    bottomLight.position.set(0, -10, 0);
+    scene.add(bottomLight);
     
     scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
     let model3D;
     const loader = new THREE.GLTFLoader();
     
-    // Membaca file .glb barumu yang sudah ditaruh di folder assets/3d
+    // Load aset .glb dari jalur publik folder proyekmu
     loader.load('/assets/3d/karya-3d.glb', function (gltf) {
         model3D = gltf.scene;
         scene.add(model3D);
         
-        // Atur posisi center objek
+        // Penyesuaian posisi center objek di dalam boks kanvas
         model3D.position.y = -1.2;
         model3D.position.x = 0;
         model3D.scale.set(2.0, 2.0, 2.0);
@@ -104,16 +103,16 @@
 
     camera.position.z = 4.5;
     
-    // ORBIT CONTROLS: Mengaktifkan swipe bebas rotasi 360 derajat dari segala arah
+    // Konfigurasi Orbit Controls untuk rotasi omnidirectional (360 derajat) yang mulus
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enableZoom = false; // Mencegah layar terganggu/ter-zoom tidak sengaja saat dosen scroll web
+    controls.enableZoom = false; // Mencegah zoom tidak sengaja saat men-scroll halaman
 
     function animate() {
         requestAnimationFrame(animate);
         
-        // Efek auto-rotate pelan berjalan otomatis jika tidak sedang digeser/di-swipe
+        // Rotasi otomatis konstan di sumbu Y ketika user tidak sedang melakukan interaksi seret/swipe
         if (model3D && !controls.state == -1) {
             model3D.rotation.y += 0.003;
         }
