@@ -29,18 +29,8 @@
         
         <div class="col-md-6 mt-5 mt-md-0">
             <div class="position-relative">
-                <div id="3d-container" style="width: 100%; height: 550px; border-radius: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 40px 80px rgba(0,0,0,0.03);"></div>
+                <div id="3d-container" style="width: 100%; height: 550px; border-radius: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 40px 80px rgba(0,0,0,0.03); cursor: grab;"></div>
                 
-                <button id="btn-3d-kiri" class="btn shadow-sm position-absolute rounded-circle d-flex align-items-center justify-content-center" 
-                        style="top: 50%; left: 20px; transform: translateY(-50%); z-index: 10; width: 45px; height: 45px; background-color: #4a148c; color: white; border: none; opacity: 0.85;">
-                    <i class="bi bi-arrow-left-short fs-4"></i>
-                </button>
-
-                <button id="btn-3d-kanan" class="btn shadow-sm position-absolute rounded-circle d-flex align-items-center justify-content-center" 
-                        style="top: 50%; right: 20px; transform: translateY(-50%); z-index: 10; width: 45px; height: 45px; background-color: #4a148c; color: white; border: none; opacity: 0.85;">
-                    <i class="bi bi-arrow-right-short fs-4"></i>
-                </button>
-
                 <div class="position-absolute top-0 end-0 m-4 p-3" style="background: white; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); animation: float 3s infinite ease-in-out; z-index: 5;">
                     <span style="font-size: 0.8rem; font-weight: 700; color: #e91e63;">✨ Interactive 3D</span>
                 </div>
@@ -64,9 +54,9 @@
         color: #4a148c !important;
         background-color: rgba(74, 20, 140, 0.02) !important;
     }
-    #btn-3d-kiri:hover, #btn-3d-kanan:hover {
-        background-color: #e91e63 !important;
-        opacity: 1 !important;
+    /* Efek visual kursor tangan mengepal saat menggeser model 3D */
+    #3d-container:active {
+        cursor: grabbing;
     }
 </style>
 
@@ -83,72 +73,47 @@
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Menambahkan pencahayaan studio agar warna tekstur GLB keluar terang dan jernih
-    const light = new THREE.DirectionalLight(0xffffff, 2.5);
-    light.position.set(5, 10, 7);
-    scene.add(light);
+    // Pencahayaan Studio Keliling agar model terlihat jelas dari segala arah
+    const light1 = new THREE.DirectionalLight(0xffffff, 2.5);
+    light1.position.set(5, 10, 7);
+    scene.add(light1);
     
-    const backlight = new THREE.DirectionalLight(0xffffff, 1.5);
-    backlight.position.set(-5, 5, -7);
-    scene.add(backlight);
+    const light2 = new THREE.DirectionalLight(0xffffff, 1.8);
+    light2.position.set(-5, 5, -7);
+    scene.add(light2);
+
+    const light3 = new THREE.DirectionalLight(0xffffff, 1.2);
+    light3.position.set(0, -10, 0); // Pencahayaan bawah agar bagian kaki tidak gelap gulita
+    scene.add(light3);
     
-    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+    scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
     let model3D;
     const loader = new THREE.GLTFLoader();
     
-    // PENYESUAIAN JALUR: Mengarah langsung ke file baru kamu di public/assets/3d/karya-3d.glb
+    // Membaca file .glb barumu yang sudah ditaruh di folder assets/3d
     loader.load('/assets/3d/karya-3d.glb', function (gltf) {
         model3D = gltf.scene;
         scene.add(model3D);
         
-        // Pengaturan posisi center agar model berdiri pas di tengah boks blur
+        // Atur posisi center objek
         model3D.position.y = -1.2;
         model3D.position.x = 0;
-        
-        // Skala disesuaikan otomatis agar tidak terlalu besar/kecil di kanvas
         model3D.scale.set(2.0, 2.0, 2.0);
-    }, undefined, function (error) {
-        console.error('Gagal memuat aset GLB, pastikan nama file di public/assets/3d/karya-3d.glb benar.', error);
     });
 
     camera.position.z = 4.5;
     
+    // ORBIT CONTROLS: Mengaktifkan swipe bebas rotasi 360 derajat dari segala arah
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enableZoom = false; // Zoom dimatikan agar saat dosen scroll layar HP/laptop tidak terganggu
-
-    // JAVASCRIPT LOGIK: Kontrol rotasi kamera menggunakan tombol panah kiri-kanan
-    const sudutRotasi = 0.5; // Besar perpindahan sudut setiap kali diklik
-
-    document.getElementById('btn-3d-kiri').addEventListener('click', () => {
-        // Mendapatkan sudut azimuth horizontal saat ini, lalu dikurangi
-        controls.target.x = 0;
-        const targetAngle = controls.getAzimuthalAngle() - sudutRotasi;
-        
-        // Memutar kamera mengitari objek secara horizontal
-        const radius = camera.position.distanceTo(controls.target);
-        camera.position.x = Math.sin(targetAngle) * radius;
-        camera.position.z = Math.cos(targetAngle) * radius;
-        controls.update();
-    });
-
-    document.getElementById('btn-3d-kanan').addEventListener('click', () => {
-        // Mendapatkan sudut azimuth horizontal saat ini, lalu ditambah
-        controls.target.x = 0;
-        const targetAngle = controls.getAzimuthalAngle() + sudutRotasi;
-        
-        const radius = camera.position.distanceTo(controls.target);
-        camera.position.x = Math.sin(targetAngle) * radius;
-        camera.position.z = Math.cos(targetAngle) * radius;
-        controls.update();
-    });
+    controls.enableZoom = false; // Mencegah layar terganggu/ter-zoom tidak sengaja saat dosen scroll web
 
     function animate() {
         requestAnimationFrame(animate);
         
-        // Efek auto-rotate halus saat tombol sedang tidak diklik atau di-swipe dosen
+        // Efek auto-rotate pelan berjalan otomatis jika tidak sedang digeser/di-swipe
         if (model3D && !controls.state == -1) {
             model3D.rotation.y += 0.003;
         }
