@@ -12,7 +12,6 @@
         </div>
     </div>
 
-    <!-- BOKS STATISTIK INTERAKTIF -->
     <div class="row mb-5 g-4 text-center">
         <div class="col-6 col-md-3">
             <div class="p-3 shadow-sm border-0 rounded-4 bg-white">
@@ -41,12 +40,11 @@
     </div>
 
     <div class="row g-5">
-        <!-- SIDEBAR INFO PROFIL & KONTAK -->
         <div class="col-lg-4">
             <div class="p-4 bg-white shadow-sm sticky-top" style="border-radius: 25px; top: 100px; border: 1px solid rgba(0,0,0,0.05);">
                 <div class="text-center mb-4">
                     <div style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; border: 5px solid #f8f9fa; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
-                        <img src="{{ asset('images/about-me.jpg') }}" alt="Diska Ayu Kartika" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="{{ asset('images/about-me.jpg') }}" alt="Diska Ayu Kartika" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                     </div>
                     <h4 class="fw-bold mb-1" style="color: #4a148c;">Diska Ayu Kartika</h4>
                     <p class="text-muted small text-uppercase" style="letter-spacing: 1px;">Multimedia Specialist & Art Director</p>
@@ -61,7 +59,6 @@
                         <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-envelope text-purple"></i></div>
                         <div style="word-break: break-all;"><small class="text-muted d-block">Email</small><strong class="text-purple-dark">diskaayukartikaa@gmail.com</strong></div>
                     </div>
-                    <!-- PENAMBAHAN NOMOR WHATSAPP KHUSUS SESUAI PERMINTAAN -->
                     <div class="d-flex align-items-start mb-3">
                         <div class="me-3 p-2 bg-light rounded-3" style="min-width: 40px; text-align: center;"><i class="bi bi-whatsapp text-purple"></i></div>
                         <div>
@@ -79,7 +76,6 @@
             </div>
         </div>
 
-        <!-- ISI KONTEN UTAMA -->
         <div class="col-lg-8">
             <div class="mb-5">
                 <h5 class="fw-bold mb-3" style="color: #4a148c;"><i class="bi bi-person-badge me-2"></i>Executive Summary</h5>
