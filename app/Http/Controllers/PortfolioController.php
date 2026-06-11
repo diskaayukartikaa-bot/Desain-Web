@@ -13,7 +13,7 @@ class PortfolioController extends Controller
     private function getPortfolioData()
     {
         return [
-            // PROJECTS (Contoh pengisian media, jika kosong/null boks otomatis hilang)
+            // PROJECTS
             [
                 'id' => 'film-nasional', 
                 'category' => 'projects', 
@@ -21,7 +21,7 @@ class PortfolioController extends Controller
                 'color' => 'pink', 
                 'title' => 'Short Film: Juara 1 Nasional', 
                 'desc' => 'Produksi film pendek kompetisi nasional berskala besar.',
-                'video_url' => 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Silakan ganti pakai link embed film aslimu jika ada
+                'video_url' => 'https://www.youtube.com/embed/SVLaUt3t8Rs', // Link asli film pendekmu
                 'image_url' => null
             ],
             [
@@ -31,8 +31,7 @@ class PortfolioController extends Controller
                 'color' => 'pink', 
                 'title' => 'Short Film: 10 Besar Karya Terbaik', 
                 'desc' => 'Produksi sinema kreatif bertema realitas sosial judi online.',
-                'video_url' => null,
-                'image_url' => null // Karena null, boks kiri otomatis tersembunyi rapi
+                'video_url' => null, 'image_url' => null
             ],
             [
                 'id' => 'film-av', 
@@ -41,8 +40,7 @@ class PortfolioController extends Controller
                 'color' => 'pink', 
                 'title' => 'Film Audio Visual Semester 2', 
                 'desc' => 'Proyek praktikum penyutradaraan dan sinematografi PENS.',
-                'video_url' => null,
-                'image_url' => null
+                'video_url' => null, 'image_url' => null
             ],
             [
                 'id' => 'yearbook', 
@@ -51,8 +49,7 @@ class PortfolioController extends Controller
                 'color' => 'pink', 
                 'title' => 'Yearbook Visual Design', 
                 'desc' => 'Perancangan tata letak grafis dan konsep estetika album kenangan.',
-                'video_url' => null,
-                'image_url' => null
+                'video_url' => null, 'image_url' => null
             ],
 
             // EXPERIENCE
@@ -72,7 +69,8 @@ class PortfolioController extends Controller
                 'color' => 'purple', 
                 'title' => 'Program Director Siniar PENS', 
                 'desc' => 'Penanggung jawab utama konten dan manajemen penyiaran podcast.',
-                'video_url' => null, 'image_url' => null
+                'video_url' => 'https://www.youtube.com/embed/kBn5QA6MGhU', // Link asli podcast Siniar PENS
+                'image_url' => null
             ],
             [
                 'id' => 'creative-agency', 
