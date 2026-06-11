@@ -26,7 +26,10 @@ class PortfolioController extends Controller
             ['id' => 'jawapos', 'category' => 'experience', 'badge' => 'Internship', 'color' => 'purple', 'title' => 'Graphic Designer Intern at Jawa Pos', 'desc' => 'Pengalaman magang profesional di industri media cetak nasional.'],
             ['id' => 'trainer-kemen', 'category' => 'experience', 'badge' => 'Public Speaking', 'color' => 'purple', 'title' => 'Trainer Stafsus Kementerian', 'desc' => 'Mengisi pelatihan keahlian multimedia untuk jajaran staf khusus.'],
             ['id' => 'trainer-flashcom', 'category' => 'experience', 'badge' => 'Public Speaking', 'color' => 'purple', 'title' => 'Trainer at Flashcom Indonesia', 'desc' => 'Mengajar kelas bidang keahlian desain grafis dan video editing.'],
-            ['id' => 'hima-mmb', 'category' => 'experience', 'badge' => 'Organization', 'color' => 'purple', 'title' => 'HAL HIMA MMB Pengurus Core', 'desc' => 'Manajemen program kerja internal komparasi organisasi mahasiswa.'],
+            
+            // PERUBAHAN JABATAN: Sudah disesuaikan menjadi Staff Public Relations HIMA MMB
+            ['id' => 'hima-mmb', 'category' => 'experience', 'badge' => 'Organization', 'color' => 'purple', 'title' => 'Staff Public Relations HIMA MMB', 'desc' => 'Manajemen hubungan publik, komunikasi eksternal, dan pelaksanaan program kerja komunikasi kreatif organisasi mahasiswa.'],
+            
             ['id' => 'mc-events', 'category' => 'experience', 'badge' => 'Public Speaking', 'color' => 'purple', 'title' => 'Master of Ceremony (MC) Events', 'desc' => 'Pemandu jalannya berbagai acara formal dan informal di kampus.'],
             ['id' => 'campus-expo', 'category' => 'experience', 'badge' => 'Event', 'color' => 'purple', 'title' => 'Campus Expo Coordinator', 'desc' => 'Eksibisi pengenalan dunia perkuliahan dan multimedia broadcasting.'],
             ['id' => 'pkm-center', 'category' => 'experience', 'badge' => 'Academic', 'color' => 'purple', 'title' => 'PKM Center PENS Admin', 'desc' => 'Tim fasilitator program kreativitas mahasiswa tingkat politeknik.'],
@@ -45,7 +48,6 @@ class PortfolioController extends Controller
     public function index()
     {
         $items = $this->getPortfolioData();
-        // Diubah menjadi 'portfolio' agar cocok dengan resources/views/portfolio.blade.php
         return view('portfolio', compact('items'));
     }
 
