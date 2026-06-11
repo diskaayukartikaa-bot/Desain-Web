@@ -29,7 +29,14 @@
         
         <div class="col-md-6 mt-5 mt-md-0">
             <div class="position-relative">
-                <div id="3d-container" style="width: 100%; height: 550px; border-radius: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 40px 80px rgba(0,0,0,0.03); cursor: grab;"></div>
+                <div id="3d-container" style="width: 100%; height: 550px; border-radius: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 40px 80px rgba(0,0,0,0.03); cursor: grab; position: relative;">
+                    
+                    <div id="loading-overlay" class="position-absolute d-flex flex-column align-items-center justify-content-center rounded-5" style="top:0; left:0; width:100%; height:100%; background: rgba(252, 248, 252, 0.9); z-index: 10; transition: opacity 0.5s ease;">
+                        <div class="spinner-border text-purple mb-3" role="status" style="color: #9c27b0;"></div>
+                        <span id="loading-text" class="fw-bold text-muted small">Memuat Aset 3D (0%) ...</span>
+                    </div>
+
+                </div>
                 
                 <div class="position-absolute top-0 end-0 m-4 p-3" style="background: white; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); animation: float 3s infinite ease-in-out; z-index: 5;">
                     <span style="font-size: 0.8rem; font-weight: 700; color: #e91e63;">✨ Interactive 3D</span>
@@ -65,6 +72,9 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
     const container = document.getElementById('3d-container');
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const loadingText = document.getElementById('loading-text');
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -72,47 +82,64 @@
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Pencahayaan multi-arah agar objek terlihat cerah dari sudut pandang mana pun
-    const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
-    mainLight.position.set(5, 10, 7);
-    scene.add(mainLight);
+    const light1 = new THREE.DirectionalLight(0xffffff, 2.5);
+    light1.position.set(5, 10, 7);
+    scene.add(light1);
     
-    const backLight = new THREE.DirectionalLight(0xffffff, 1.8);
-    backLight.position.set(-5, 5, -7);
-    scene.add(backLight);
-
-    const bottomLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    bottomLight.position.set(0, -10, 0);
-    scene.add(bottomLight);
+    const light2 = new THREE.DirectionalLight(0xffffff, 1.8);
+    light2.position.set(-5, 5, -7);
+    scene.add(light2);
     
     scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
     let model3D;
-    const loader = new THREE.GLTFLoader();
     
-    // Load aset .glb dari jalur publik folder proyekmu
+    // MENGGUNAKAN LOADING MANAGER UNTUK MENGHITUNG PERSENTASE LOAD FILE 74MB
+    const manager = new THREE.LoadingManager();
+    manager.onProgress = function ( item, loaded, total ) {
+        const percentComplete = Math.round((loaded / total) * 100);
+        loadingText.innerText = `Memuat Aset 3D (${percentComplete}%) ...`;
+    };
+    
+    manager.onLoad = function () {
+        // Hilangkan overlay loading secara halus setelah file 100% termuat
+        loadingOverlay.style.opacity = '0';
+        setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+        }, 500);
+    };
+
+    const loader = new THREE.GLTFLoader(manager);
+    
+    // Pastikan nama file di public/assets/3d/karya-3d.glb sudah kamu samakan!
     loader.load('/assets/3d/karya-3d.glb', function (gltf) {
         model3D = gltf.scene;
         scene.add(model3D);
         
-        // Penyesuaian posisi center objek di dalam boks kanvas
         model3D.position.y = -1.2;
         model3D.position.x = 0;
         model3D.scale.set(2.0, 2.0, 2.0);
+    }, function (xhr) {
+        // Fallback progress tracking jika header Content-Length server aktif
+        if (xhr.lengthComputable) {
+            const percentComplete = Math.round((xhr.loaded / xhr.total) * 100);
+            loadingText.innerText = `Mengunduh (${percentComplete}%) ...`;
+        }
+    }, function (error) {
+        loadingText.innerText = "Gagal memuat model 3D.";
+        console.error(error);
     });
 
     camera.position.z = 4.5;
     
-    // Konfigurasi Orbit Controls untuk rotasi omnidirectional (360 derajat) yang mulus
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enableZoom = false; // Mencegah zoom tidak sengaja saat men-scroll halaman
+    controls.enableZoom = false;
 
     function animate() {
         requestAnimationFrame(animate);
         
-        // Rotasi otomatis konstan di sumbu Y ketika user tidak sedang melakukan interaksi seret/swipe
         if (model3D && !controls.state == -1) {
             model3D.rotation.y += 0.003;
         }
