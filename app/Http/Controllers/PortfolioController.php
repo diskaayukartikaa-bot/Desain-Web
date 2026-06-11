@@ -140,7 +140,7 @@ class PortfolioController extends Controller
                 'category' => 'experience', 
                 'badge' => 'Academic', 
                 'color' => 'purple', 
-                'title' => 'PKM Center PENS Admin', 
+                'title' => 'PKM Center PENS Humas & Media', 
                 'desc' => 'Tim fasilitator program kreativitas mahasiswa tingkat politeknik.',
                 'video_url' => null, 'image_url' => null
             ],
