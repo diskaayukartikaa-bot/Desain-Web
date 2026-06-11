@@ -85,8 +85,7 @@
     let model3D;
     const loader = new THREE.GLTFLoader();
     
-    // JALUR DIUBAH LANGSUNG KE ROOT PUBLIC AGAR TERHINDAR DARI EROR 404
-    loader.load('/3d/karya-3d.glb', function (gltf) {
+    loader.load('/assets/3d/karya-3d.glb', function (gltf) {
         model3D = gltf.scene;
         scene.add(model3D);
         
@@ -94,7 +93,7 @@
         model3D.position.x = 0;
         model3D.scale.set(2.0, 2.0, 2.0);
     }, undefined, function (error) {
-        console.error("Gagal memuat file dari jalur /3d/karya-3d.glb", error);
+        console.error("Gagal memuat file 3D", error);
     });
 
     camera.position.z = 4.5;
